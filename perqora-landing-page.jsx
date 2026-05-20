@@ -1,4 +1,4 @@
-export default function DevOpsAIConsultancy() {
+export default function PerqoraLandingPage() {
   const services = [
     {
       title: 'AI-Powered Infrastructure Automation',
@@ -307,6 +307,8 @@ export default function DevOpsAIConsultancy() {
               </div>
             </div>
           </div>
+
+        </section>
 
         <section id="about" className="max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center">
           <div>
