@@ -40,18 +40,19 @@ const services = [
   },
 ];
 
-const signals = [
-  'End-to-end DevOps services',
-  'AI infrastructure automation',
-  'AWS, Azure, and GCP infrastructure',
-  'Kubernetes platform operations',
-  'Terraform and IaC automation',
-  'Cloud migration',
-  'Observability engineering',
-  'SRE consulting',
-  'CI/CD modernization',
-  'Cloud cost optimization',
-  'Startup infrastructure',
+const capabilityGroups = [
+  {
+    title: 'Infrastructure & Cloud',
+    items: ['AWS, Azure, and GCP', 'Cloud migration', 'Kubernetes platforms', 'Terraform and IaC'],
+  },
+  {
+    title: 'DevOps & Reliability',
+    items: ['CI/CD modernization', 'SRE consulting', 'Observability engineering', 'Incident readiness'],
+  },
+  {
+    title: 'AI-Native Operations',
+    items: ['AI infrastructure automation', 'DevOps workflow automation', 'Runbook intelligence', 'Cost optimization'],
+  },
 ];
 
 const auditItems = [
@@ -67,6 +68,14 @@ const outcomes = [
   ['Cost', 'identify waste, rightsizing opportunities, and avoidable managed-service spend'],
   ['Speed', 'standardize delivery with reusable Terraform, CI/CD, and platform workflows'],
   ['Reliability', 'reduce operational risk with SLOs, observability, runbooks, and safer releases'],
+];
+
+const opsActivities = [
+  ['Plan', 'Terraform drift check', 'clean'],
+  ['Build', 'CI pipeline release gate', 'passing'],
+  ['Deploy', 'Kubernetes rollout', 'progressing'],
+  ['Observe', 'SLO burn-rate watch', 'stable'],
+  ['Optimize', 'Cloud cost anomaly scan', 'queued'],
 ];
 
 function AuditLink({ children, className = '' }) {
@@ -91,6 +100,46 @@ function Field({ label, children }) {
   );
 }
 
+function MailIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none">
+      <path
+        d="M4 6.5h16v11H4v-11Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path
+        d="m5 7.5 7 5.2 7-5.2"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function LinkedinIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none">
+      <path
+        d="M5.2 9.4v9.2M5.2 5.4v.1M10 18.6V9.4M10 13.5c0-2.6 1.5-4.3 3.9-4.3 2.1 0 3.6 1.5 3.6 4.1v5.3"
+        stroke="currentColor"
+        strokeWidth="1.9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M3.5 3.5h17v17h-17v-17Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 const inputClass =
   'w-full rounded-md border border-[#2b3935] bg-[#0b1110] px-4 py-3 text-sm text-[#eef4f1] outline-none transition placeholder:text-[#677772] focus:border-[#7ab7a8]';
 
@@ -108,7 +157,7 @@ export default function PerqoraLandingPage() {
             <span>
               <span className="block text-lg font-semibold leading-none">Perqora</span>
               <span className="mt-1 block text-xs text-[#879892]">
-                DevOps, AI, and infrastructure services
+                AI-Native Infrastructure Engineering
               </span>
             </span>
           </a>
@@ -130,12 +179,12 @@ export default function PerqoraLandingPage() {
           <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-6 sm:py-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-20">
             <div>
               <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
-                DevOps, AI, and infrastructure services for teams that need reliable scale.
+                Build, automate, and operate infrastructure for modern engineering teams.
               </h1>
 
               <p className="mt-6 max-w-2xl text-base leading-8 text-[#c4d0cc] sm:text-lg">
-                Perqora provides end-to-end services across cloud infrastructure, DevOps
-                automation, AI-native operations, platform engineering, Kubernetes, observability,
+                Perqora provides AI-native infrastructure engineering across cloud platforms,
+                DevOps automation, Kubernetes operations, platform engineering, observability,
                 SRE, migration, and cloud cost optimization.
               </p>
 
@@ -164,11 +213,11 @@ export default function PerqoraLandingPage() {
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-lg border border-[#22302c] bg-[#111917]">
+            <div className="overflow-hidden rounded-lg border border-[#22302c] bg-[#07111a]">
               <img
                 src="/brand/perqora-hero.png"
                 alt="Perqora AI-native infrastructure engineering"
-                className="h-full min-h-[360px] w-full object-cover"
+                className="aspect-[2.5/1] w-full object-contain"
               />
             </div>
 
@@ -176,15 +225,63 @@ export default function PerqoraLandingPage() {
         </section>
 
         <section className="border-b border-[#22302c] bg-[#0b1110]">
-          <div className="mx-auto flex max-w-7xl flex-wrap gap-2 px-5 py-5 sm:px-6">
-            {signals.map((signal) => (
-              <span
-                key={signal}
-                className="rounded-md border border-[#24322e] bg-[#101815] px-3 py-2 text-sm text-[#adbcb7]"
-              >
-                {signal}
-              </span>
+          <div className="mx-auto grid max-w-7xl gap-4 px-5 py-8 sm:px-6 lg:grid-cols-3">
+            {capabilityGroups.map((group) => (
+              <section key={group.title} className="rounded-lg border border-[#22302c] bg-[#101815] p-5">
+                <h2 className="text-sm font-semibold text-[#c9b79c]">{group.title}</h2>
+                <div className="mt-4 grid gap-2">
+                  {group.items.map((item) => (
+                    <p key={item} className="text-sm leading-6 text-[#adbcb7]">
+                      {item}
+                    </p>
+                  ))}
+                </div>
+              </section>
             ))}
+          </div>
+        </section>
+
+        <section className="border-b border-[#22302c] bg-[#0d1412]">
+          <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:py-20">
+            <div>
+              <p className="text-sm font-semibold text-[#9bc9bd]">Live Operating Layer</p>
+              <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
+                A moving view of the work Perqora keeps under control.
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-[#b7c6c1]">
+                Infrastructure is not a static setup. It is a continuous loop of planning,
+                shipping, observing, scaling, and optimizing across DevOps, AI, cloud, and
+                reliability systems.
+              </p>
+            </div>
+
+            <div className="ops-scene rounded-lg border border-[#22302c] bg-[#08110f] p-5">
+              <div className="ops-grid">
+                <div className="ops-core">
+                  <img src="/brand/perqora-mark.png" alt="" className="h-16 w-16 rounded-md object-cover" />
+                  <span>Perqora Control Plane</span>
+                </div>
+
+                {opsActivities.map(([stage, activity, status], index) => (
+                  <div
+                    key={stage}
+                    className={`ops-node ops-node-${index + 1}`}
+                    style={{ '--delay': `${index * 0.35}s` }}
+                  >
+                    <span className="text-xs font-semibold text-[#c9b79c]">{stage}</span>
+                    <strong className="mt-1 block text-sm font-semibold text-white">{activity}</strong>
+                    <span className="mt-2 inline-flex rounded-md bg-[#10211d] px-2 py-1 text-xs text-[#9bc9bd]">
+                      {status}
+                    </span>
+                  </div>
+                ))}
+
+                <span className="ops-line ops-line-1" />
+                <span className="ops-line ops-line-2" />
+                <span className="ops-line ops-line-3" />
+                <span className="ops-line ops-line-4" />
+              </div>
+            </div>
           </div>
         </section>
 
@@ -280,24 +377,25 @@ export default function PerqoraLandingPage() {
                 Share enough context for Perqora to respond with the right next step. For a direct
                 meeting, use the Book Audit button in the header.
               </p>
-              <div className="mt-7 space-y-3 text-sm text-[#aebcb7]">
-                <p>
-                  Email:{' '}
-                  <a href="mailto:admin@perqora.in" className="font-semibold text-[#dce6e2]">
-                    admin@perqora.in
-                  </a>
-                </p>
-                <p>
-                  LinkedIn:{' '}
-                  <a
-                    href="https://www.linkedin.com/company/perqora"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="font-semibold text-[#dce6e2]"
-                  >
-                    linkedin.com/company/perqora
-                  </a>
-                </p>
+              <div className="mt-7 flex gap-3">
+                <a
+                  href="mailto:admin@perqora.in"
+                  aria-label="Email Perqora"
+                  title="Email Perqora"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-[#2b3935] text-[#dce6e2] transition hover:border-[#7ab7a8] hover:text-white"
+                >
+                  <MailIcon />
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/perqora"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Perqora on LinkedIn"
+                  title="Perqora on LinkedIn"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-[#2b3935] text-[#dce6e2] transition hover:border-[#7ab7a8] hover:text-white"
+                >
+                  <LinkedinIcon />
+                </a>
               </div>
             </div>
 
@@ -377,8 +475,30 @@ export default function PerqoraLandingPage() {
         </section>
       </main>
 
-      <footer className="border-t border-[#22302c] bg-[#0b1110] px-5 py-8 text-center text-sm text-[#879892]">
-        Copyright 2026 Perqora. AI-Native Infrastructure Engineering.
+      <footer className="border-t border-[#22302c] bg-[#0b1110] px-5 py-8 text-sm text-[#879892]">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 sm:flex-row">
+          <p>Copyright 2026 Perqora. AI-Native Infrastructure Engineering.</p>
+          <div className="flex gap-3">
+            <a
+              href="mailto:admin@perqora.in"
+              aria-label="Email Perqora"
+              title="Email Perqora"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[#2b3935] text-[#dce6e2] transition hover:border-[#7ab7a8] hover:text-white"
+            >
+              <MailIcon />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/perqora"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Perqora on LinkedIn"
+              title="Perqora on LinkedIn"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[#2b3935] text-[#dce6e2] transition hover:border-[#7ab7a8] hover:text-white"
+            >
+              <LinkedinIcon />
+            </a>
+          </div>
+        </div>
       </footer>
     </div>
   );
