@@ -10,37 +10,46 @@ const navItems = [
 const services = [
   {
     label: 'Platform Engineering',
-    title: 'Internal developer platforms that remove delivery drag',
+    title: 'Build an internal platform your engineers can actually use',
     description:
-      'Golden paths, CI/CD standards, environment automation, Kubernetes workflows, and Terraform modules built for repeatable startup delivery.',
+      'Golden paths, CI/CD standards, environment automation, Kubernetes workflows, and Terraform modules for repeatable product delivery.',
   },
   {
     label: 'Kubernetes Consulting',
-    title: 'Production Kubernetes without operational guesswork',
+    title: 'Stabilize and scale production Kubernetes',
     description:
       'Cluster architecture, workload reliability, autoscaling, ingress, security baselines, backup strategy, and incident-ready operations.',
   },
   {
     label: 'Cloud Cost Optimization',
-    title: 'FinOps engineering tied directly to infrastructure changes',
+    title: 'Reduce cloud waste without slowing teams down',
     description:
       'AWS and GCP cost audits, rightsizing, Spot strategy, workload scheduling, storage cleanup, commitment planning, and visibility dashboards.',
   },
   {
+    label: 'Cloud & Kubernetes Migration',
+    title: 'Move workloads with less risk and cleaner operations',
+    description:
+      'Migration planning, landing zones, workload cutovers, Terraform refactors, Kubernetes adoption, rollback plans, and post-migration reliability checks.',
+  },
+  {
     label: 'AI DevOps',
-    title: 'AI-native DevOps automation for faster engineering teams',
+    title: 'Use AI-native automation where it removes real toil',
     description:
       'Terraform automation, AI-assisted runbooks, observability workflows, deployment checks, and infrastructure review systems.',
   },
 ];
 
 const signals = [
-  'AWS and GCP infrastructure',
-  'Kubernetes reliability',
-  'Terraform automation',
+  'End-to-end DevOps services',
+  'AI infrastructure automation',
+  'AWS, Azure, and GCP infrastructure',
+  'Kubernetes platform operations',
+  'Terraform and IaC automation',
+  'Cloud migration',
   'Observability engineering',
   'SRE consulting',
-  'DevOps automation',
+  'CI/CD modernization',
   'Cloud cost optimization',
   'Startup infrastructure',
 ];
@@ -49,53 +58,62 @@ const auditItems = [
   'Cloud spend, waste, and rightsizing review',
   'Kubernetes reliability and scaling assessment',
   'Terraform structure and automation review',
+  'Migration readiness and cutover risk review',
   'CI/CD flow, release safety, and rollback checks',
   'Observability gaps, alert noise, and incident readiness',
-  'A practical 30/60/90 day infrastructure roadmap',
 ];
 
 const outcomes = [
-  ['40%', 'potential cloud cost reduction through workload tuning and FinOps controls'],
-  ['10x', 'faster infrastructure delivery with reusable Terraform and platform patterns'],
-  ['99.95%', 'reliability target for startup workloads that need production discipline'],
+  ['Cost', 'identify waste, rightsizing opportunities, and avoidable managed-service spend'],
+  ['Speed', 'standardize delivery with reusable Terraform, CI/CD, and platform workflows'],
+  ['Reliability', 'reduce operational risk with SLOs, observability, runbooks, and safer releases'],
 ];
 
-function CtaLink({ children, variant = 'primary', className = '' }) {
-  const styles =
-    variant === 'primary'
-      ? 'bg-[#f4d35e] text-[#071014] hover:bg-[#ffe477] shadow-[0_18px_45px_rgba(244,211,94,0.18)]'
-      : 'border border-[#64d2c8]/45 bg-[#0c2d32] text-[#dffcf7] hover:border-[#64d2c8] hover:bg-[#113d43]';
-
+function AuditLink({ children, className = '' }) {
   return (
     <a
       href={calendlyUrl}
       target="_blank"
       rel="noreferrer"
-      className={`inline-flex min-h-12 items-center justify-center rounded-lg px-5 py-3 text-sm font-semibold transition ${styles} ${className}`}
+      className={`inline-flex min-h-11 items-center justify-center rounded-md bg-[#b8a27a] px-4 py-2.5 text-sm font-semibold text-[#111614] transition hover:bg-[#c6b28e] ${className}`}
     >
       {children}
     </a>
   );
 }
 
+function Field({ label, children }) {
+  return (
+    <label className="block">
+      <span className="mb-2 block text-sm font-medium text-[#b7c6c1]">{label}</span>
+      {children}
+    </label>
+  );
+}
+
+const inputClass =
+  'w-full rounded-md border border-[#2b3935] bg-[#0b1110] px-4 py-3 text-sm text-[#eef4f1] outline-none transition placeholder:text-[#677772] focus:border-[#7ab7a8]';
+
 export default function PerqoraLandingPage() {
   return (
-    <div className="min-h-screen bg-[#071014] text-[#f7faf8]">
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-[#071014]/90 backdrop-blur-xl">
+    <div className="min-h-screen bg-[#0b1110] text-[#eef4f1]">
+      <header className="sticky top-0 z-40 border-b border-[#22302c] bg-[#0b1110]/95 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-4 sm:px-6">
           <a href="/" className="flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#64d2c8] text-base font-black text-[#071014]">
-              P
-            </span>
+            <img
+              src="/brand/perqora-mark.png"
+              alt="Perqora"
+              className="h-10 w-10 rounded-md object-cover"
+            />
             <span>
-              <span className="block text-lg font-bold leading-none tracking-tight">Perqora</span>
-              <span className="mt-1 block text-xs text-[#9fb0ac]">
-                AI-native infrastructure engineering
+              <span className="block text-lg font-semibold leading-none">Perqora</span>
+              <span className="mt-1 block text-xs text-[#879892]">
+                DevOps, AI, and infrastructure services
               </span>
             </span>
           </a>
 
-          <nav className="hidden items-center gap-6 text-sm text-[#c4d0cd] md:flex">
+          <nav className="hidden items-center gap-6 text-sm text-[#b7c6c1] md:flex">
             {navItems.map(([label, href]) => (
               <a key={label} href={href} className="transition hover:text-white">
                 {label}
@@ -103,87 +121,66 @@ export default function PerqoraLandingPage() {
             ))}
           </nav>
 
-          <CtaLink className="hidden sm:inline-flex">Book Audit</CtaLink>
+          <AuditLink className="hidden sm:inline-flex">Book Audit</AuditLink>
         </div>
       </header>
 
       <main>
-        <section className="relative overflow-hidden border-b border-white/10">
-          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(100,210,200,0.16),transparent_34%),linear-gradient(315deg,rgba(244,211,94,0.12),transparent_38%)]" />
-          <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#64d2c8]/70 to-transparent" />
-
-          <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:px-6 sm:py-20 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:py-24">
+        <section className="border-b border-[#22302c] bg-[#0d1412]">
+          <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-6 sm:py-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-20">
             <div>
-              <p className="mb-5 inline-flex rounded-lg border border-[#64d2c8]/35 bg-[#102328] px-3 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-[#8fe7de]">
-                DevOps, SRE, Kubernetes, Terraform
-              </p>
-
-              <h1 className="max-w-4xl text-4xl font-black leading-[1.02] tracking-tight text-white sm:text-5xl lg:text-7xl">
-                DevOps-centric infrastructure for startups that need to scale cleanly.
+              <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
+                DevOps, AI, and infrastructure services for teams that need reliable scale.
               </h1>
 
-              <p className="mt-6 max-w-2xl text-base leading-8 text-[#c6d1ce] sm:text-lg">
-                Perqora helps teams design, automate, and operate cloud infrastructure with
-                Kubernetes consulting, platform engineering, Terraform automation, SRE practices,
-                observability engineering, and cloud cost optimization.
+              <p className="mt-6 max-w-2xl text-base leading-8 text-[#c4d0cc] sm:text-lg">
+                Perqora provides end-to-end services across cloud infrastructure, DevOps
+                automation, AI-native operations, platform engineering, Kubernetes, observability,
+                SRE, migration, and cloud cost optimization.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <CtaLink>Book Infrastructure Audit</CtaLink>
-                <CtaLink variant="secondary">Schedule Architecture Review</CtaLink>
+                <a
+                  href="#services"
+                  className="inline-flex min-h-11 items-center justify-center rounded-md bg-[#7ab7a8] px-4 py-2.5 text-sm font-semibold text-[#0b1110] transition hover:bg-[#8fc6ba]"
+                >
+                  View Services
+                </a>
+                <a
+                  href="#contact"
+                  className="inline-flex min-h-11 items-center justify-center rounded-md border border-[#38504a] px-4 py-2.5 text-sm font-semibold text-[#d9e4e0] transition hover:border-[#7ab7a8]"
+                >
+                  Send Project Details
+                </a>
               </div>
 
-              <div className="mt-10 grid gap-3 sm:grid-cols-3">
+              <div className="mt-10 grid gap-4 sm:grid-cols-3">
                 {outcomes.map(([metric, label]) => (
-                  <div key={metric} className="border-l border-[#64d2c8]/45 pl-4">
-                    <p className="text-3xl font-black text-[#f4d35e]">{metric}</p>
-                    <p className="mt-2 text-sm leading-6 text-[#aab8b5]">{label}</p>
+                  <div key={metric} className="border-l border-[#35534c] pl-4">
+                    <p className="text-xl font-semibold text-[#c9b79c]">{metric}</p>
+                    <p className="mt-2 text-sm leading-6 text-[#9eaca7]">{label}</p>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="rounded-xl border border-white/10 bg-[#0d1b20] p-5 shadow-2xl shadow-black/30">
-              <div className="mb-5 flex items-center justify-between gap-4 border-b border-white/10 pb-4">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.18em] text-[#8fe7de]">
-                    Runtime Console
-                  </p>
-                  <h2 className="mt-1 text-xl font-bold">Infrastructure audit snapshot</h2>
-                </div>
-                <span className="rounded-md bg-[#193f30] px-3 py-2 text-xs font-semibold text-[#b8f7c8]">
-                  Live
-                </span>
-              </div>
-
-              <div className="space-y-3">
-                {[
-                  ['Kubernetes readiness', 'Autoscaling, ingress, resource limits, recovery plans'],
-                  ['Terraform automation', 'Reusable modules, state safety, review workflow'],
-                  ['Observability posture', 'Metrics, traces, SLOs, alert quality, dashboards'],
-                  ['Cloud cost profile', 'Waste, commitments, storage, compute, network spend'],
-                ].map(([title, detail]) => (
-                  <div key={title} className="rounded-lg border border-white/10 bg-[#071014] p-4">
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <p className="font-semibold text-white">{title}</p>
-                        <p className="mt-1 text-sm leading-6 text-[#aab8b5]">{detail}</p>
-                      </div>
-                      <span className="mt-1 h-2.5 w-2.5 rounded-full bg-[#64d2c8]" />
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <div className="overflow-hidden rounded-lg border border-[#22302c] bg-[#111917]">
+              <img
+                src="/brand/perqora-hero.png"
+                alt="Perqora AI-native infrastructure engineering"
+                className="h-full min-h-[360px] w-full object-cover"
+              />
             </div>
+
           </div>
         </section>
 
-        <section className="border-b border-white/10 bg-[#0a1519]">
-          <div className="mx-auto flex max-w-7xl flex-wrap gap-3 px-5 py-5 sm:px-6">
+        <section className="border-b border-[#22302c] bg-[#0b1110]">
+          <div className="mx-auto flex max-w-7xl flex-wrap gap-2 px-5 py-5 sm:px-6">
             {signals.map((signal) => (
               <span
                 key={signal}
-                className="rounded-md border border-white/10 bg-[#101f24] px-3 py-2 text-sm text-[#c8d4d1]"
+                className="rounded-md border border-[#24322e] bg-[#101815] px-3 py-2 text-sm text-[#adbcb7]"
               >
                 {signal}
               </span>
@@ -191,95 +188,80 @@ export default function PerqoraLandingPage() {
           </div>
         </section>
 
-        <section id="services" className="mx-auto max-w-7xl px-5 py-16 sm:px-6 lg:py-20">
+        <section id="services" className="mx-auto max-w-7xl px-5 py-14 sm:px-6 lg:py-20">
           <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#8fe7de]">
-              Services
-            </p>
-            <h2 className="mt-4 text-3xl font-black tracking-tight text-white sm:text-5xl">
-              A practical DevOps partner for infrastructure-heavy teams.
+            <p className="text-sm font-semibold text-[#9bc9bd]">Services</p>
+            <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
+              Practical DevOps support for infrastructure-heavy teams.
             </h2>
-            <p className="mt-5 text-lg leading-8 text-[#b9c6c2]">
-              The focus is fewer production surprises, faster releases, cleaner automation, and a
-              cloud platform your engineering team can trust.
+            <p className="mt-5 text-lg leading-8 text-[#b7c6c1]">
+              The work is focused on fewer production surprises, cleaner automation, safer
+              migrations, lower cloud waste, and a platform your engineering team can operate.
             </p>
           </div>
 
-          <div className="mt-10 grid gap-5 md:grid-cols-2">
+          <div className="mt-9 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {services.map((service) => (
               <article
                 key={service.label}
-                className="rounded-xl border border-white/10 bg-[#0d1b20] p-6 transition hover:border-[#64d2c8]/50"
+                className="rounded-lg border border-[#22302c] bg-[#111917] p-5 transition hover:border-[#58746d]"
               >
-                <p className="text-sm font-semibold text-[#f4d35e]">{service.label}</p>
-                <h3 className="mt-3 text-2xl font-bold leading-tight text-white">
+                <p className="text-sm font-semibold text-[#c9b79c]">{service.label}</p>
+                <h3 className="mt-3 text-xl font-semibold leading-7 text-white">
                   {service.title}
                 </h3>
-                <p className="mt-4 leading-7 text-[#b9c6c2]">{service.description}</p>
+                <p className="mt-4 text-sm leading-7 text-[#aebcb7]">{service.description}</p>
               </article>
             ))}
           </div>
         </section>
 
-        <section id="platform" className="border-y border-white/10 bg-[#101611]">
-          <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:py-20">
+        <section id="platform" className="border-y border-[#22302c] bg-[#101612]">
+          <div className="mx-auto grid max-w-7xl gap-9 px-5 py-14 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:py-20">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#f4d35e]">
-                Operating Model
-              </p>
-              <h2 className="mt-4 text-3xl font-black tracking-tight text-white sm:text-5xl">
-                From infrastructure noise to a reliable platform.
+              <p className="text-sm font-semibold text-[#c9b79c]">Operating Model</p>
+              <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
+                From infrastructure noise to a platform roadmap.
               </h2>
             </div>
 
-            <div className="grid gap-4">
+            <div className="grid gap-3">
               {[
                 ['01', 'Audit the current cloud, cluster, Terraform, CI/CD, and observability setup.'],
-                ['02', 'Design a platform roadmap with the highest-risk and highest-cost items first.'],
+                ['02', 'Map migration, cost, reliability, and automation priorities by business risk.'],
                 ['03', 'Automate repeatable infrastructure workflows and remove manual release steps.'],
                 ['04', 'Harden reliability with SLOs, alerts, runbooks, dashboards, and recovery paths.'],
-                ['05', 'Hand over clean operating practices your team can keep improving.'],
+                ['05', 'Hand over clear operating practices your team can keep improving.'],
               ].map(([step, text]) => (
-                <div key={step} className="grid grid-cols-[48px_1fr] gap-4 rounded-lg bg-[#0a1519] p-4">
-                  <span className="font-mono text-sm font-bold text-[#64d2c8]">{step}</span>
-                  <p className="leading-7 text-[#d2dcda]">{text}</p>
+                <div key={step} className="grid grid-cols-[44px_1fr] gap-4 rounded-md bg-[#0b1110] p-4">
+                  <span className="font-mono text-sm font-semibold text-[#7ab7a8]">{step}</span>
+                  <p className="leading-7 text-[#cbd6d2]">{text}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        <section id="audit" className="mx-auto max-w-7xl px-5 py-16 sm:px-6 lg:py-20">
-          <div className="grid gap-10 lg:grid-cols-[1fr_0.95fr] lg:items-center">
+        <section id="audit" className="mx-auto max-w-7xl px-5 py-14 sm:px-6 lg:py-20">
+          <div className="grid gap-9 lg:grid-cols-[1fr_0.95fr] lg:items-start">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#8fe7de]">
-                Infrastructure Audit
-              </p>
-              <h2 className="mt-4 text-3xl font-black tracking-tight text-white sm:text-5xl">
+              <p className="text-sm font-semibold text-[#9bc9bd]">Infrastructure Audit</p>
+              <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
                 Find the bottlenecks before they become incidents.
               </h2>
-              <p className="mt-5 text-lg leading-8 text-[#b9c6c2]">
-                The audit is built for technical leaders who need a clear view of
-                reliability risk, DevOps automation gaps, Kubernetes complexity, and cloud spend.
+              <p className="mt-5 text-lg leading-8 text-[#b7c6c1]">
+                The audit gives technical leaders a clear view of reliability risk, DevOps
+                automation gaps, Kubernetes complexity, migration readiness, and cloud spend.
               </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <CtaLink>Book Audit on Calendly</CtaLink>
-                <a
-                  href="mailto:admin@perqora.in?subject=Perqora%20Infrastructure%20Audit"
-                  className="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/15 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
-                >
-                  Email admin@perqora.in
-                </a>
-              </div>
             </div>
 
-            <div className="rounded-xl border border-white/10 bg-[#0d1b20] p-6">
-              <h3 className="text-xl font-bold text-white">What the review covers</h3>
+            <div className="rounded-lg border border-[#22302c] bg-[#111917] p-5">
+              <h3 className="text-xl font-semibold text-white">What the review covers</h3>
               <div className="mt-5 space-y-3">
                 {auditItems.map((item) => (
-                  <div key={item} className="flex gap-3 rounded-lg bg-[#071014] p-4">
-                    <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#f4d35e]" />
-                    <p className="leading-7 text-[#cdd8d5]">{item}</p>
+                  <div key={item} className="flex gap-3 rounded-md bg-[#0b1110] p-4">
+                    <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#7ab7a8]" />
+                    <p className="leading-7 text-[#cbd6d2]">{item}</p>
                   </div>
                 ))}
               </div>
@@ -287,66 +269,115 @@ export default function PerqoraLandingPage() {
           </div>
         </section>
 
-        <section id="contact" className="border-t border-white/10 bg-[#0a1519]">
-          <div className="mx-auto grid max-w-7xl gap-8 px-5 py-16 sm:px-6 lg:grid-cols-[1fr_0.8fr] lg:py-20">
+        <section id="contact" className="border-t border-[#22302c] bg-[#0d1412]">
+          <div className="mx-auto grid max-w-7xl gap-9 px-5 py-14 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:py-20">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#f4d35e]">
-                Contact
-              </p>
-              <h2 className="mt-4 text-3xl font-black tracking-tight text-white sm:text-5xl">
-                Ready to make your infrastructure easier to operate?
+              <p className="text-sm font-semibold text-[#c9b79c]">Contact</p>
+              <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
+                Tell us what you are trying to fix or migrate.
               </h2>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-[#b9c6c2]">
-                Bring Perqora in when cloud cost, Kubernetes reliability, Terraform automation,
-                SRE maturity, or DevOps velocity starts slowing the product team down.
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-[#b7c6c1]">
+                Share enough context for Perqora to respond with the right next step. For a direct
+                meeting, use the Book Audit button in the header.
               </p>
+              <div className="mt-7 space-y-3 text-sm text-[#aebcb7]">
+                <p>
+                  Email:{' '}
+                  <a href="mailto:admin@perqora.in" className="font-semibold text-[#dce6e2]">
+                    admin@perqora.in
+                  </a>
+                </p>
+                <p>
+                  LinkedIn:{' '}
+                  <a
+                    href="https://www.linkedin.com/company/perqora"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-semibold text-[#dce6e2]"
+                  >
+                    linkedin.com/company/perqora
+                  </a>
+                </p>
+              </div>
             </div>
 
-            <div className="rounded-xl border border-white/10 bg-[#071014] p-6">
-              <dl className="space-y-5">
-                <div>
-                  <dt className="text-sm text-[#8fa19d]">Email</dt>
-                  <dd className="mt-1">
-                    <a href="mailto:admin@perqora.in" className="text-lg font-semibold text-white">
-                      admin@perqora.in
-                    </a>
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-sm text-[#8fa19d]">Architecture review</dt>
-                  <dd className="mt-1">
-                    <a
-                      href={calendlyUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-lg font-semibold text-[#8fe7de] hover:text-white"
-                    >
-                      Schedule a 30-minute Calendly call
-                    </a>
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-sm text-[#8fa19d]">LinkedIn</dt>
-                  <dd className="mt-1">
-                    <a
-                      href="https://www.linkedin.com/company/perqora"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-lg font-semibold text-[#8fe7de] hover:text-white"
-                    >
-                      linkedin.com/company/perqora
-                    </a>
-                  </dd>
-                </div>
-              </dl>
+            <form
+              action="mailto:admin@perqora.in"
+              method="post"
+              encType="text/plain"
+              className="rounded-lg border border-[#22302c] bg-[#111917] p-5"
+            >
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Field label="Name">
+                  <input name="name" required className={inputClass} placeholder="Your name" />
+                </Field>
+                <Field label="Work email">
+                  <input
+                    name="email"
+                    required
+                    type="email"
+                    className={inputClass}
+                    placeholder="you@company.com"
+                  />
+                </Field>
+                <Field label="Company">
+                  <input name="company" className={inputClass} placeholder="Company name" />
+                </Field>
+                <Field label="Service needed">
+                  <select name="service" className={inputClass} defaultValue="">
+                    <option value="" disabled>
+                      Select one
+                    </option>
+                    <option>Platform engineering</option>
+                    <option>Kubernetes consulting</option>
+                    <option>Cloud cost optimization</option>
+                    <option>Cloud or Kubernetes migration</option>
+                    <option>AI DevOps automation</option>
+                    <option>Observability or SRE</option>
+                  </select>
+                </Field>
+                <Field label="Timeline">
+                  <select name="timeline" className={inputClass} defaultValue="">
+                    <option value="" disabled>
+                      Select one
+                    </option>
+                    <option>Immediately</option>
+                    <option>In the next 30 days</option>
+                    <option>This quarter</option>
+                    <option>Planning for later</option>
+                  </select>
+                </Field>
+                <Field label="Cloud / stack">
+                  <input
+                    name="stack"
+                    className={inputClass}
+                    placeholder="AWS, GCP, Kubernetes, Terraform"
+                  />
+                </Field>
+              </div>
 
-              <CtaLink className="mt-7 w-full">Book Infrastructure Audit</CtaLink>
-            </div>
+              <Field label="What should we know?">
+                <textarea
+                  name="message"
+                  required
+                  rows={5}
+                  className={`${inputClass} mt-2 resize-y`}
+                  placeholder="Describe your current infrastructure, migration, reliability, or cloud cost challenge."
+                />
+              </Field>
+
+              <button
+                type="submit"
+                className="mt-5 inline-flex min-h-11 w-full items-center justify-center rounded-md bg-[#7ab7a8] px-4 py-2.5 text-sm font-semibold text-[#0b1110] transition hover:bg-[#8fc6ba]"
+              >
+                Send Inquiry
+              </button>
+            </form>
           </div>
         </section>
       </main>
 
-      <footer className="border-t border-white/10 bg-[#071014] px-5 py-8 text-center text-sm text-[#8fa19d]">
+      <footer className="border-t border-[#22302c] bg-[#0b1110] px-5 py-8 text-center text-sm text-[#879892]">
         Copyright 2026 Perqora. AI-Native Infrastructure Engineering.
       </footer>
     </div>

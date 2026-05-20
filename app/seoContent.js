@@ -6,11 +6,11 @@ export const pages = {
     title: 'Services',
     heading: 'Infrastructure Engineering Services For Startups',
     description:
-      'Perqora provides platform engineering, Kubernetes consulting, Terraform automation, observability engineering, SRE consulting, and cloud cost optimization for startup infrastructure teams.',
+      'Perqora provides platform engineering, Kubernetes consulting, cloud and Kubernetes migration, Terraform automation, observability engineering, SRE consulting, and cloud cost optimization for startup infrastructure teams.',
     sections: [
-      'Design and operate cloud infrastructure foundations across AWS, GCP, Kubernetes, CI/CD, identity, networking, and release systems.',
+      'Design, migrate, and operate cloud infrastructure foundations across AWS, GCP, Kubernetes, CI/CD, identity, networking, and release systems.',
       'Automate repeatable infrastructure work with Terraform modules, policy guardrails, deployment pipelines, and AI-native DevOps workflows.',
-      'Improve reliability with observability engineering, production readiness reviews, SLO design, incident response, and practical SRE consulting.',
+      'Plan safer migrations with landing zones, workload cutovers, rollback paths, post-migration validation, and practical SRE consulting.',
     ],
   },
   platformEngineering: {
@@ -34,7 +34,7 @@ export const pages = {
     sections: [
       'Review cluster architecture, ingress, autoscaling, networking, storage, security boundaries, and release workflows.',
       'Improve production reliability with capacity planning, workload isolation, rollout safety, SLOs, and incident-ready observability.',
-      'Support migrations from fragile clusters to maintainable Kubernetes platforms that can grow with the business.',
+      'Support migrations from fragile clusters or VM-based workloads to maintainable Kubernetes platforms that can grow with the business.',
     ],
   },
   cloudCostOptimization: {
@@ -66,11 +66,11 @@ export const pages = {
     title: 'Contact',
     heading: 'Talk To Perqora About Startup Infrastructure',
     description:
-      'Contact Perqora for Kubernetes consulting, platform engineering, cloud cost optimization, observability engineering, SRE consulting, and AI-native DevOps automation.',
+      'Contact Perqora for Kubernetes consulting, platform engineering, cloud migration, cloud cost optimization, observability engineering, SRE consulting, and AI-native DevOps automation.',
     sections: [
-      'Share your current cloud infrastructure, Kubernetes, Terraform, observability, reliability, or DevOps automation challenge.',
-      'Perqora can start with an infrastructure audit, architecture review, cost optimization review, or focused platform engineering engagement.',
-      'Email admin@perqora.in or schedule an architecture review to discuss the highest-impact next step.',
+      'Share your current cloud infrastructure, Kubernetes, Terraform, observability, reliability, migration, or DevOps automation challenge.',
+      'Perqora can start with an infrastructure audit, architecture review, migration readiness review, cost optimization review, or focused platform engineering engagement.',
+      'Email admin@perqora.in or schedule an architecture review with details about your company, stack, timeline, and highest-impact next step.',
     ],
   },
 };
