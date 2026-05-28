@@ -1,81 +1,65 @@
 const calendlyUrl = 'https://calendly.com/admin-perqora/30-minute-meeting-clone';
 
-const navItems = [
-  ['Services', '#services'],
-  ['Platform', '#platform'],
-  ['Audit', '#audit'],
-  ['Contact', '#contact'],
-];
-
 const services = [
   {
     label: 'Platform Engineering',
-    title: 'Build an internal platform your engineers can actually use',
+    title: 'Developer platforms that make delivery boring again',
     description:
-      'Golden paths, CI/CD standards, environment automation, Kubernetes workflows, and Terraform modules for repeatable product delivery.',
+      'Golden paths, CI/CD standards, Terraform modules, environment automation, and Kubernetes workflows that remove recurring infrastructure friction.',
   },
   {
-    label: 'Kubernetes Consulting',
-    title: 'Stabilize and scale production Kubernetes',
+    label: 'Kubernetes & SRE',
+    title: 'Production systems with fewer surprises',
     description:
-      'Cluster architecture, workload reliability, autoscaling, ingress, security baselines, backup strategy, and incident-ready operations.',
+      'Cluster architecture, rollout safety, autoscaling, ingress, observability, SLOs, runbooks, and reliability practices for teams operating at speed.',
+  },
+  {
+    label: 'AI-Native DevOps',
+    title: 'Automation where it reduces real operational load',
+    description:
+      'AI-assisted runbooks, infrastructure reviews, deployment checks, alert enrichment, incident analysis, and repeatable operations workflows.',
   },
   {
     label: 'Cloud Cost Optimization',
-    title: 'Reduce cloud waste without slowing teams down',
+    title: 'FinOps improvements backed by engineering changes',
     description:
-      'AWS and GCP cost audits, rightsizing, Spot strategy, workload scheduling, storage cleanup, commitment planning, and visibility dashboards.',
+      'Rightsizing, workload scheduling, Spot strategy, storage cleanup, commitment planning, cost dashboards, and Terraform-backed guardrails.',
   },
   {
     label: 'Cloud & Kubernetes Migration',
-    title: 'Move workloads with less risk and cleaner operations',
+    title: 'Migrations planned around risk, rollback, and continuity',
     description:
-      'Migration planning, landing zones, workload cutovers, Terraform refactors, Kubernetes adoption, rollback plans, and post-migration reliability checks.',
+      'Landing zones, workload cutovers, Kubernetes adoption, Terraform refactors, validation plans, and post-migration reliability hardening.',
   },
   {
-    label: 'AI DevOps',
-    title: 'Use AI-native automation where it removes real toil',
+    label: 'Observability Engineering',
+    title: 'Signals that help teams decide faster',
     description:
-      'Terraform automation, AI-assisted runbooks, observability workflows, deployment checks, and infrastructure review systems.',
+      'Metrics, logs, traces, SLO dashboards, alert quality, incident readiness, and operational views tuned for engineering leaders.',
   },
 ];
 
-const capabilityGroups = [
-  {
-    title: 'Infrastructure & Cloud',
-    items: ['AWS, Azure, and GCP', 'Cloud migration', 'Kubernetes platforms', 'Terraform and IaC'],
-  },
-  {
-    title: 'DevOps & Reliability',
-    items: ['CI/CD modernization', 'SRE consulting', 'Observability engineering', 'Incident readiness'],
-  },
-  {
-    title: 'AI-Native Operations',
-    items: ['AI infrastructure automation', 'DevOps workflow automation', 'Runbook intelligence', 'Cost optimization'],
-  },
+const proofPoints = [
+  ['Cloud', 'AWS, Azure, GCP foundations, networking, IAM, landing zones'],
+  ['Delivery', 'CI/CD modernization, release gates, rollback paths, golden workflows'],
+  ['Operations', 'SRE, observability, runbooks, incident response, reliability reviews'],
+  ['Automation', 'Terraform, Kubernetes automation, AI-native DevOps workflows'],
 ];
 
-const auditItems = [
-  'Cloud spend, waste, and rightsizing review',
-  'Kubernetes reliability and scaling assessment',
-  'Terraform structure and automation review',
-  'Migration readiness and cutover risk review',
-  'CI/CD flow, release safety, and rollback checks',
-  'Observability gaps, alert noise, and incident readiness',
-];
-
-const outcomes = [
-  ['Cost', 'identify waste, rightsizing opportunities, and avoidable managed-service spend'],
-  ['Speed', 'standardize delivery with reusable Terraform, CI/CD, and platform workflows'],
-  ['Reliability', 'reduce operational risk with SLOs, observability, runbooks, and safer releases'],
+const operatingLoop = [
+  ['01', 'Assess', 'cost, reliability, migration risk, automation debt'],
+  ['02', 'Design', 'target architecture, platform roadmap, controls'],
+  ['03', 'Automate', 'Terraform, CI/CD, Kubernetes, policy guardrails'],
+  ['04', 'Operate', 'SLOs, observability, runbooks, incident readiness'],
+  ['05', 'Optimize', 'cloud cost, scaling, release velocity, team handover'],
 ];
 
 const opsActivities = [
-  ['Plan', 'Terraform drift check', 'clean'],
-  ['Build', 'CI pipeline release gate', 'passing'],
+  ['Plan', 'Terraform drift review', 'clean'],
+  ['Build', 'release gate', 'passing'],
   ['Deploy', 'Kubernetes rollout', 'progressing'],
-  ['Observe', 'SLO burn-rate watch', 'stable'],
-  ['Optimize', 'Cloud cost anomaly scan', 'queued'],
+  ['Observe', 'SLO burn-rate', 'stable'],
+  ['Optimize', 'cloud cost scan', 'queued'],
 ];
 
 function AuditLink({ children, className = '' }) {
@@ -84,7 +68,7 @@ function AuditLink({ children, className = '' }) {
       href={calendlyUrl}
       target="_blank"
       rel="noreferrer"
-      className={`inline-flex min-h-11 items-center justify-center rounded-md bg-[#b8a27a] px-4 py-2.5 text-sm font-semibold text-[#111614] transition hover:bg-[#c6b28e] ${className}`}
+      className={`inline-flex min-h-11 items-center justify-center rounded-full bg-[#111827] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#243145] ${className}`}
     >
       {children}
     </a>
@@ -94,7 +78,7 @@ function AuditLink({ children, className = '' }) {
 function Field({ label, children }) {
   return (
     <label className="block">
-      <span className="mb-2 block text-sm font-medium text-[#b7c6c1]">{label}</span>
+      <span className="mb-2 block text-sm font-medium text-[#53605c]">{label}</span>
       {children}
     </label>
   );
@@ -103,12 +87,7 @@ function Field({ label, children }) {
 function MailIcon() {
   return (
     <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none">
-      <path
-        d="M4 6.5h16v11H4v-11Z"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinejoin="round"
-      />
+      <path d="M4 6.5h16v11H4v-11Z" stroke="currentColor" strokeWidth="1.8" />
       <path
         d="m5 7.5 7 5.2 7-5.2"
         stroke="currentColor"
@@ -130,44 +109,37 @@ function LinkedinIcon() {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <path
-        d="M3.5 3.5h17v17h-17v-17Z"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinejoin="round"
-      />
+      <path d="M3.5 3.5h17v17h-17v-17Z" stroke="currentColor" strokeWidth="1.6" />
     </svg>
   );
 }
 
 const inputClass =
-  'w-full rounded-md border border-[#2b3935] bg-[#0b1110] px-4 py-3 text-sm text-[#eef4f1] outline-none transition placeholder:text-[#677772] focus:border-[#7ab7a8]';
+  'w-full rounded-xl border border-[#d8d2c4] bg-white px-4 py-3 text-sm text-[#18201d] outline-none transition placeholder:text-[#8b948f] focus:border-[#1f7568]';
 
 export default function PerqoraLandingPage() {
   return (
-    <div className="min-h-screen bg-[#0b1110] text-[#eef4f1]">
-      <header className="sticky top-0 z-40 border-b border-[#22302c] bg-[#0b1110]/95 backdrop-blur">
+    <div className="min-h-screen bg-[#f4f0e7] text-[#18201d]">
+      <header className="sticky top-0 z-40 border-b border-[#ded7c8] bg-[#f8f5ee]/92 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-4 sm:px-6">
-          <a href="/" className="flex items-center gap-3">
+          <a href="/" className="flex min-w-0 items-center gap-3">
             <img
               src="/brand/perqora-mark.png"
               alt="Perqora"
-              className="h-10 w-10 rounded-md object-cover"
+              className="h-11 w-11 shrink-0 rounded-xl object-cover"
             />
-            <span>
+            <span className="min-w-0">
               <span className="block text-lg font-semibold leading-none">Perqora</span>
-              <span className="mt-1 block text-xs text-[#879892]">
+              <span className="mt-1 block text-xs text-[#64716c]">
                 AI-Native Infrastructure Engineering
               </span>
             </span>
           </a>
 
-          <nav className="hidden items-center gap-6 text-sm text-[#b7c6c1] md:flex">
-            {navItems.map(([label, href]) => (
-              <a key={label} href={href} className="transition hover:text-white">
-                {label}
-              </a>
-            ))}
+          <nav className="hidden items-center gap-7 text-sm text-[#53605c] md:flex">
+            <a href="#services" className="transition hover:text-[#18201d]">Services</a>
+            <a href="#operating-system" className="transition hover:text-[#18201d]">Operating System</a>
+            <a href="#contact" className="transition hover:text-[#18201d]">Contact</a>
           </nav>
 
           <AuditLink className="hidden sm:inline-flex">Book Audit</AuditLink>
@@ -175,90 +147,71 @@ export default function PerqoraLandingPage() {
       </header>
 
       <main>
-        <section className="border-b border-[#22302c] bg-[#0d1412]">
-          <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-6 sm:py-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-20">
+        <section className="relative overflow-hidden border-b border-[#ded7c8] bg-[#f8f5ee]">
+          <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:items-center lg:py-24">
             <div>
-              <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
-                Build, automate, and operate infrastructure for modern engineering teams.
+              <p className="mb-5 inline-flex rounded-full border border-[#d8d2c4] bg-white px-4 py-2 text-sm font-medium text-[#53605c]">
+                Elite DevOps, AI, and infrastructure consultancy
+              </p>
+              <h1 className="max-w-4xl text-4xl font-semibold leading-[1.04] text-[#111827] sm:text-5xl lg:text-6xl">
+                Infrastructure that scales without becoming the company bottleneck.
               </h1>
-
-              <p className="mt-6 max-w-2xl text-base leading-8 text-[#c4d0cc] sm:text-lg">
-                Perqora provides AI-native infrastructure engineering across cloud platforms,
-                DevOps automation, Kubernetes operations, platform engineering, observability,
-                SRE, migration, and cloud cost optimization.
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-[#53605c]">
+                Perqora designs, automates, migrates, and operates serious cloud infrastructure
+                across DevOps, AI-native operations, Kubernetes, platform engineering,
+                observability, SRE, and cloud cost optimization.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <AuditLink>Book Infrastructure Audit</AuditLink>
                 <a
                   href="#services"
-                  className="inline-flex min-h-11 items-center justify-center rounded-md bg-[#7ab7a8] px-4 py-2.5 text-sm font-semibold text-[#0b1110] transition hover:bg-[#8fc6ba]"
+                  className="inline-flex min-h-11 items-center justify-center rounded-full border border-[#c9c0af] bg-transparent px-5 py-3 text-sm font-semibold text-[#18201d] transition hover:border-[#7f8f88]"
                 >
-                  View Services
+                  Explore Services
                 </a>
-                <a
-                  href="#contact"
-                  className="inline-flex min-h-11 items-center justify-center rounded-md border border-[#38504a] px-4 py-2.5 text-sm font-semibold text-[#d9e4e0] transition hover:border-[#7ab7a8]"
-                >
-                  Send Project Details
-                </a>
-              </div>
-
-              <div className="mt-10 grid gap-4 sm:grid-cols-3">
-                {outcomes.map(([metric, label]) => (
-                  <div key={metric} className="border-l border-[#35534c] pl-4">
-                    <p className="text-xl font-semibold text-[#c9b79c]">{metric}</p>
-                    <p className="mt-2 text-sm leading-6 text-[#9eaca7]">{label}</p>
-                  </div>
-                ))}
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-lg border border-[#22302c] bg-[#07111a]">
+            <div className="rounded-[28px] border border-[#ded7c8] bg-[#0c1621] p-3 shadow-[0_28px_80px_rgba(20,30,35,0.16)]">
               <img
                 src="/brand/perqora-hero.png"
                 alt="Perqora AI-native infrastructure engineering"
-                className="aspect-[2.5/1] w-full object-contain"
+                className="aspect-[2.5/1] w-full rounded-[20px] object-contain"
               />
             </div>
-
           </div>
         </section>
 
-        <section className="border-b border-[#22302c] bg-[#0b1110]">
-          <div className="mx-auto grid max-w-7xl gap-4 px-5 py-8 sm:px-6 lg:grid-cols-3">
-            {capabilityGroups.map((group) => (
-              <section key={group.title} className="rounded-lg border border-[#22302c] bg-[#101815] p-5">
-                <h2 className="text-sm font-semibold text-[#c9b79c]">{group.title}</h2>
-                <div className="mt-4 grid gap-2">
-                  {group.items.map((item) => (
-                    <p key={item} className="text-sm leading-6 text-[#adbcb7]">
-                      {item}
-                    </p>
-                  ))}
-                </div>
+        <section className="border-b border-[#ded7c8] bg-[#f4f0e7]">
+          <div className="mx-auto grid max-w-7xl gap-px px-5 py-8 sm:px-6 lg:grid-cols-4">
+            {proofPoints.map(([title, copy]) => (
+              <section key={title} className="bg-[#fffaf1] p-5 first:rounded-l-2xl last:rounded-r-2xl">
+                <p className="text-sm font-semibold text-[#1f7568]">{title}</p>
+                <p className="mt-3 text-sm leading-6 text-[#53605c]">{copy}</p>
               </section>
             ))}
           </div>
         </section>
 
-        <section className="border-b border-[#22302c] bg-[#0d1412]">
-          <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:py-20">
+        <section id="operating-system" className="bg-[#111827] text-white">
+          <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:py-24">
             <div>
-              <p className="text-sm font-semibold text-[#9bc9bd]">Live Operating Layer</p>
-              <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
-                A moving view of the work Perqora keeps under control.
+              <p className="text-sm font-semibold text-[#9fd6c9]">Live Operating System</p>
+              <h2 className="mt-4 text-3xl font-semibold leading-tight sm:text-5xl">
+                A moving view of DevOps work before it turns into noise.
               </h2>
-              <p className="mt-5 text-lg leading-8 text-[#b7c6c1]">
-                Infrastructure is not a static setup. It is a continuous loop of planning,
-                shipping, observing, scaling, and optimizing across DevOps, AI, cloud, and
-                reliability systems.
+              <p className="mt-5 text-lg leading-8 text-[#c7d2cc]">
+                Perqora treats infrastructure as a living operating layer: releases, clusters,
+                Terraform state, reliability signals, AI workflows, and cost controls moving
+                together.
               </p>
             </div>
 
-            <div className="ops-scene rounded-lg border border-[#22302c] bg-[#08110f] p-5">
+            <div className="ops-scene rounded-3xl border border-white/10 bg-[#0b1118] p-4">
               <div className="ops-grid">
                 <div className="ops-core">
-                  <img src="/brand/perqora-mark.png" alt="" className="h-16 w-16 rounded-md object-cover" />
+                  <img src="/brand/perqora-mark.png" alt="" className="h-16 w-16 rounded-xl object-cover" />
                   <span>Perqora Control Plane</span>
                 </div>
 
@@ -270,7 +223,7 @@ export default function PerqoraLandingPage() {
                   >
                     <span className="text-xs font-semibold text-[#c9b79c]">{stage}</span>
                     <strong className="mt-1 block text-sm font-semibold text-white">{activity}</strong>
-                    <span className="mt-2 inline-flex rounded-md bg-[#10211d] px-2 py-1 text-xs text-[#9bc9bd]">
+                    <span className="mt-2 inline-flex rounded-full bg-[#10211d] px-2.5 py-1 text-xs text-[#9fd6c9]">
                       {status}
                     </span>
                   </div>
@@ -285,104 +238,76 @@ export default function PerqoraLandingPage() {
           </div>
         </section>
 
-        <section id="services" className="mx-auto max-w-7xl px-5 py-14 sm:px-6 lg:py-20">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold text-[#9bc9bd]">Services</p>
-            <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
-              Practical DevOps support for infrastructure-heavy teams.
-            </h2>
-            <p className="mt-5 text-lg leading-8 text-[#b7c6c1]">
-              The work is focused on fewer production surprises, cleaner automation, safer
-              migrations, lower cloud waste, and a platform your engineering team can operate.
+        <section id="services" className="mx-auto max-w-7xl px-5 py-16 sm:px-6 lg:py-24">
+          <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+            <div>
+              <p className="text-sm font-semibold text-[#1f7568]">Services</p>
+              <h2 className="mt-4 text-3xl font-semibold leading-tight text-[#111827] sm:text-5xl">
+                Consultancy for the infrastructure problems that stall product teams.
+              </h2>
+            </div>
+            <p className="text-lg leading-8 text-[#53605c]">
+              The work is intentionally practical: fewer production surprises, cleaner automation,
+              safer migrations, lower cloud waste, and engineering teams that spend more time
+              shipping product.
             </p>
           </div>
 
-          <div className="mt-9 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {services.map((service) => (
               <article
                 key={service.label}
-                className="rounded-lg border border-[#22302c] bg-[#111917] p-5 transition hover:border-[#58746d]"
+                className="rounded-2xl border border-[#ded7c8] bg-[#fffaf1] p-6 transition hover:-translate-y-1 hover:border-[#9aa89f]"
               >
-                <p className="text-sm font-semibold text-[#c9b79c]">{service.label}</p>
-                <h3 className="mt-3 text-xl font-semibold leading-7 text-white">
+                <p className="text-sm font-semibold text-[#1f7568]">{service.label}</p>
+                <h3 className="mt-3 text-xl font-semibold leading-7 text-[#111827]">
                   {service.title}
                 </h3>
-                <p className="mt-4 text-sm leading-7 text-[#aebcb7]">{service.description}</p>
+                <p className="mt-4 text-sm leading-7 text-[#53605c]">{service.description}</p>
               </article>
             ))}
           </div>
         </section>
 
-        <section id="platform" className="border-y border-[#22302c] bg-[#101612]">
-          <div className="mx-auto grid max-w-7xl gap-9 px-5 py-14 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:py-20">
+        <section className="border-y border-[#ded7c8] bg-[#fffaf1]">
+          <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:py-24">
             <div>
-              <p className="text-sm font-semibold text-[#c9b79c]">Operating Model</p>
-              <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
-                From infrastructure noise to a platform roadmap.
+              <p className="text-sm font-semibold text-[#1f7568]">Operating Model</p>
+              <h2 className="mt-4 text-3xl font-semibold leading-tight text-[#111827] sm:text-5xl">
+                Senior infrastructure work, packaged into a clear engagement path.
               </h2>
             </div>
-
             <div className="grid gap-3">
-              {[
-                ['01', 'Audit the current cloud, cluster, Terraform, CI/CD, and observability setup.'],
-                ['02', 'Map migration, cost, reliability, and automation priorities by business risk.'],
-                ['03', 'Automate repeatable infrastructure workflows and remove manual release steps.'],
-                ['04', 'Harden reliability with SLOs, alerts, runbooks, dashboards, and recovery paths.'],
-                ['05', 'Hand over clear operating practices your team can keep improving.'],
-              ].map(([step, text]) => (
-                <div key={step} className="grid grid-cols-[44px_1fr] gap-4 rounded-md bg-[#0b1110] p-4">
-                  <span className="font-mono text-sm font-semibold text-[#7ab7a8]">{step}</span>
-                  <p className="leading-7 text-[#cbd6d2]">{text}</p>
+              {operatingLoop.map(([step, title, copy]) => (
+                <div key={step} className="grid grid-cols-[52px_1fr] gap-4 rounded-2xl bg-white p-5">
+                  <span className="font-mono text-sm font-semibold text-[#1f7568]">{step}</span>
+                  <div>
+                    <p className="font-semibold text-[#111827]">{title}</p>
+                    <p className="mt-1 text-sm leading-6 text-[#53605c]">{copy}</p>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        <section id="audit" className="mx-auto max-w-7xl px-5 py-14 sm:px-6 lg:py-20">
-          <div className="grid gap-9 lg:grid-cols-[1fr_0.95fr] lg:items-start">
+        <section id="contact" className="bg-[#f8f5ee]">
+          <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:py-24">
             <div>
-              <p className="text-sm font-semibold text-[#9bc9bd]">Infrastructure Audit</p>
-              <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
-                Find the bottlenecks before they become incidents.
+              <p className="text-sm font-semibold text-[#1f7568]">Contact</p>
+              <h2 className="mt-4 text-3xl font-semibold leading-tight text-[#111827] sm:text-5xl">
+                Tell us what needs to get stronger.
               </h2>
-              <p className="mt-5 text-lg leading-8 text-[#b7c6c1]">
-                The audit gives technical leaders a clear view of reliability risk, DevOps
-                automation gaps, Kubernetes complexity, migration readiness, and cloud spend.
-              </p>
-            </div>
-
-            <div className="rounded-lg border border-[#22302c] bg-[#111917] p-5">
-              <h3 className="text-xl font-semibold text-white">What the review covers</h3>
-              <div className="mt-5 space-y-3">
-                {auditItems.map((item) => (
-                  <div key={item} className="flex gap-3 rounded-md bg-[#0b1110] p-4">
-                    <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#7ab7a8]" />
-                    <p className="leading-7 text-[#cbd6d2]">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="contact" className="border-t border-[#22302c] bg-[#0d1412]">
-          <div className="mx-auto grid max-w-7xl gap-9 px-5 py-14 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:py-20">
-            <div>
-              <p className="text-sm font-semibold text-[#c9b79c]">Contact</p>
-              <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
-                Tell us what you are trying to fix or migrate.
-              </h2>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-[#b7c6c1]">
-                Share enough context for Perqora to respond with the right next step. For a direct
-                meeting, use the Book Audit button in the header.
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-[#53605c]">
+                Share your current infrastructure, migration, reliability, automation, or cost
+                challenge. Perqora will respond with the right next step.
               </p>
               <div className="mt-7 flex gap-3">
                 <a
                   href="mailto:admin@perqora.in"
                   aria-label="Email Perqora"
                   title="Email Perqora"
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-[#2b3935] text-[#dce6e2] transition hover:border-[#7ab7a8] hover:text-white"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#c9c0af] text-[#18201d] transition hover:border-[#1f7568]"
                 >
                   <MailIcon />
                 </a>
@@ -392,7 +317,7 @@ export default function PerqoraLandingPage() {
                   rel="noreferrer"
                   aria-label="Perqora on LinkedIn"
                   title="Perqora on LinkedIn"
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-[#2b3935] text-[#dce6e2] transition hover:border-[#7ab7a8] hover:text-white"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#c9c0af] text-[#18201d] transition hover:border-[#1f7568]"
                 >
                   <LinkedinIcon />
                 </a>
@@ -403,29 +328,21 @@ export default function PerqoraLandingPage() {
               action="mailto:admin@perqora.in"
               method="post"
               encType="text/plain"
-              className="rounded-lg border border-[#22302c] bg-[#111917] p-5"
+              className="rounded-3xl border border-[#ded7c8] bg-white p-6 shadow-[0_24px_70px_rgba(20,30,35,0.08)]"
             >
               <div className="grid gap-4 sm:grid-cols-2">
                 <Field label="Name">
                   <input name="name" required className={inputClass} placeholder="Your name" />
                 </Field>
                 <Field label="Work email">
-                  <input
-                    name="email"
-                    required
-                    type="email"
-                    className={inputClass}
-                    placeholder="you@company.com"
-                  />
+                  <input name="email" required type="email" className={inputClass} placeholder="you@company.com" />
                 </Field>
                 <Field label="Company">
                   <input name="company" className={inputClass} placeholder="Company name" />
                 </Field>
                 <Field label="Service needed">
                   <select name="service" className={inputClass} defaultValue="">
-                    <option value="" disabled>
-                      Select one
-                    </option>
+                    <option value="" disabled>Select one</option>
                     <option>Platform engineering</option>
                     <option>Kubernetes consulting</option>
                     <option>Cloud cost optimization</option>
@@ -436,9 +353,7 @@ export default function PerqoraLandingPage() {
                 </Field>
                 <Field label="Timeline">
                   <select name="timeline" className={inputClass} defaultValue="">
-                    <option value="" disabled>
-                      Select one
-                    </option>
+                    <option value="" disabled>Select one</option>
                     <option>Immediately</option>
                     <option>In the next 30 days</option>
                     <option>This quarter</option>
@@ -446,11 +361,7 @@ export default function PerqoraLandingPage() {
                   </select>
                 </Field>
                 <Field label="Cloud / stack">
-                  <input
-                    name="stack"
-                    className={inputClass}
-                    placeholder="AWS, GCP, Kubernetes, Terraform"
-                  />
+                  <input name="stack" className={inputClass} placeholder="AWS, GCP, Kubernetes, Terraform" />
                 </Field>
               </div>
 
@@ -460,13 +371,13 @@ export default function PerqoraLandingPage() {
                   required
                   rows={5}
                   className={`${inputClass} mt-2 resize-y`}
-                  placeholder="Describe your current infrastructure, migration, reliability, or cloud cost challenge."
+                  placeholder="Describe your infrastructure, migration, reliability, or cloud cost challenge."
                 />
               </Field>
 
               <button
                 type="submit"
-                className="mt-5 inline-flex min-h-11 w-full items-center justify-center rounded-md bg-[#7ab7a8] px-4 py-2.5 text-sm font-semibold text-[#0b1110] transition hover:bg-[#8fc6ba]"
+                className="mt-5 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-[#111827] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#243145]"
               >
                 Send Inquiry
               </button>
@@ -475,7 +386,7 @@ export default function PerqoraLandingPage() {
         </section>
       </main>
 
-      <footer className="border-t border-[#22302c] bg-[#0b1110] px-5 py-8 text-sm text-[#879892]">
+      <footer className="border-t border-[#ded7c8] bg-[#f4f0e7] px-5 py-8 text-sm text-[#53605c]">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 sm:flex-row">
           <p>Copyright 2026 Perqora. AI-Native Infrastructure Engineering.</p>
           <div className="flex gap-3">
@@ -483,7 +394,7 @@ export default function PerqoraLandingPage() {
               href="mailto:admin@perqora.in"
               aria-label="Email Perqora"
               title="Email Perqora"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[#2b3935] text-[#dce6e2] transition hover:border-[#7ab7a8] hover:text-white"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#c9c0af] text-[#18201d] transition hover:border-[#1f7568]"
             >
               <MailIcon />
             </a>
@@ -493,7 +404,7 @@ export default function PerqoraLandingPage() {
               rel="noreferrer"
               aria-label="Perqora on LinkedIn"
               title="Perqora on LinkedIn"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[#2b3935] text-[#dce6e2] transition hover:border-[#7ab7a8] hover:text-white"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#c9c0af] text-[#18201d] transition hover:border-[#1f7568]"
             >
               <LinkedinIcon />
             </a>
