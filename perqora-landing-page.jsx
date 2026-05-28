@@ -46,6 +46,39 @@ const proofPoints = [
   ['Automation', 'Terraform, Kubernetes automation, AI-native DevOps workflows'],
 ];
 
+const clientSignals = [
+  ['Series B SaaS', 'improved deployment reliability with CI/CD guardrails, rollback paths, and observability review'],
+  ['Fintech startup', 'migrated workloads toward Kubernetes with Terraform structure and cloud governance controls'],
+  ['AI product company', 'reduced cloud cost exposure through rightsizing, workload scheduling, and cost visibility'],
+];
+
+const engagementModels = [
+  {
+    title: 'Infrastructure Audit',
+    duration: '1-2 weeks',
+    description:
+      'A focused review of cloud spend, Kubernetes reliability, Terraform structure, CI/CD safety, observability, and migration risk.',
+  },
+  {
+    title: 'Architecture Review',
+    duration: 'single working session',
+    description:
+      'A senior review for teams deciding how to scale, migrate, modernize DevOps, or reduce production risk before committing roadmap time.',
+  },
+  {
+    title: 'Platform Sprint',
+    duration: '2-4 weeks',
+    description:
+      'Hands-on delivery for Terraform modules, CI/CD workflows, Kubernetes foundations, observability dashboards, or AI DevOps automation.',
+  },
+  {
+    title: 'Infrastructure Retainer',
+    duration: 'monthly',
+    description:
+      'Ongoing platform engineering, SRE consulting, cloud cost optimization, and operational support for teams without a full internal platform group.',
+  },
+];
+
 const operatingLoop = [
   ['01', 'Assess', 'cost, reliability, migration risk, automation debt'],
   ['02', 'Design', 'target architecture, platform roadmap, controls'],
@@ -60,6 +93,25 @@ const opsActivities = [
   ['Deploy', 'Kubernetes rollout', 'progressing'],
   ['Observe', 'SLO burn-rate', 'stable'],
   ['Optimize', 'cloud cost scan', 'queued'],
+];
+
+const faqs = [
+  [
+    'What does Perqora do?',
+    'Perqora provides AI-native infrastructure engineering across DevOps automation, Kubernetes consulting, platform engineering, cloud migration, observability, SRE, and cloud cost optimization.',
+  ],
+  [
+    'Who is Perqora for?',
+    'Perqora is built for startups and cloud-heavy engineering teams that need senior infrastructure execution without immediately building a large internal platform team.',
+  ],
+  [
+    'Can Perqora help with Kubernetes migration?',
+    'Yes. Perqora supports migration planning, landing zones, Terraform refactors, workload cutovers, rollback planning, and post-migration reliability hardening.',
+  ],
+  [
+    'How does a project start?',
+    'Most engagements begin with an infrastructure audit or architecture review, followed by a focused platform sprint or monthly infrastructure retainer.',
+  ],
 ];
 
 function AuditLink({ children, className = '' }) {
@@ -101,15 +153,10 @@ function MailIcon() {
 
 function LinkedinIcon() {
   return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none">
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
       <path
-        d="M5.2 9.4v9.2M5.2 5.4v.1M10 18.6V9.4M10 13.5c0-2.6 1.5-4.3 3.9-4.3 2.1 0 3.6 1.5 3.6 4.1v5.3"
-        stroke="currentColor"
-        strokeWidth="1.9"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        d="M4.98 3.5h14.04c.82 0 1.48.66 1.48 1.48v14.04c0 .82-.66 1.48-1.48 1.48H4.98c-.82 0-1.48-.66-1.48-1.48V4.98c0-.82.66-1.48 1.48-1.48Zm2.04 6.2v7.75h2.36V9.7H7.02Zm1.18-3.42c-.76 0-1.32.53-1.32 1.22 0 .7.54 1.22 1.29 1.22h.02c.78 0 1.32-.52 1.32-1.22-.02-.69-.54-1.22-1.31-1.22Zm2.75 3.42v7.75h2.36v-4.33c0-.23.02-.46.09-.62.17-.46.58-.94 1.25-.94.88 0 1.23.67 1.23 1.65v4.24h2.36v-4.51c0-2.41-1.29-3.53-3.01-3.53-1.39 0-2.01.77-2.36 1.31V9.7h-1.92Z"
       />
-      <path d="M3.5 3.5h17v17h-17v-17Z" stroke="currentColor" strokeWidth="1.6" />
     </svg>
   );
 }
@@ -118,9 +165,29 @@ const inputClass =
   'w-full rounded-xl border border-[#d8d2c4] bg-white px-4 py-3 text-sm text-[#18201d] outline-none transition placeholder:text-[#8b948f] focus:border-[#1f7568]';
 
 export default function PerqoraLandingPage() {
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(([question, answer]) => ({
+      '@type': 'Question',
+      name: question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: answer,
+      },
+    })),
+  };
+
   return (
     <div className="min-h-screen bg-[#f4f0e7] text-[#18201d]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <header className="sticky top-0 z-40 border-b border-[#ded7c8] bg-[#f8f5ee]/92 backdrop-blur">
+        <div className="border-b border-[#ded7c8] bg-[#111827] px-5 py-2 text-center text-xs font-medium text-[#f8f5ee]">
+          June 2026 capacity: accepting 3 AI-native DevOps and infrastructure engagements.
+        </div>
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-4 sm:px-6">
           <a href="/" className="flex min-w-0 items-center gap-3">
             <img
@@ -154,7 +221,7 @@ export default function PerqoraLandingPage() {
                 Elite DevOps, AI, and infrastructure consultancy
               </p>
               <h1 className="max-w-4xl text-4xl font-semibold leading-[1.04] text-[#111827] sm:text-5xl lg:text-6xl">
-                Infrastructure that scales without becoming the company bottleneck.
+                AI-native DevOps engineering for cloud platforms, Kubernetes, and scale.
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[#53605c]">
                 Perqora designs, automates, migrates, and operates serious cloud infrastructure
@@ -177,7 +244,7 @@ export default function PerqoraLandingPage() {
               <img
                 src="/brand/perqora-hero.png"
                 alt="Perqora AI-native infrastructure engineering"
-                className="aspect-[2.5/1] w-full rounded-[20px] object-contain"
+                className="aspect-[2.35/1] w-full rounded-[20px] object-contain"
               />
             </div>
           </div>
@@ -194,17 +261,83 @@ export default function PerqoraLandingPage() {
           </div>
         </section>
 
+        <section className="border-b border-[#ded7c8] bg-[#f8f5ee]">
+          <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:py-24">
+            <div>
+              <p className="text-sm font-semibold text-[#1f7568]">Trust Signals</p>
+              <h2 className="mt-4 text-3xl font-semibold leading-tight text-[#111827] sm:text-5xl">
+                Built for teams where infrastructure risk is already business risk.
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-[#53605c]">
+                Perqora can support named client proof when available. Until then, the site uses
+                accurate anonymized engagement patterns instead of pretending to have public logos.
+              </p>
+            </div>
+            <div className="grid gap-4">
+              {clientSignals.map(([type, work]) => (
+                <article key={type} className="rounded-2xl border border-[#ded7c8] bg-white p-5">
+                  <p className="text-sm font-semibold text-[#1f7568]">{type}</p>
+                  <p className="mt-2 text-base leading-7 text-[#53605c]">{work}</p>
+                </article>
+              ))}
+              <blockquote className="rounded-2xl border border-[#c9c0af] bg-[#fffaf1] p-6 text-lg leading-8 text-[#18201d]">
+                "Perqora is designed for engineering leaders who need practical infrastructure
+                execution: cleaner automation, safer releases, stronger observability, and less
+                cloud waste."
+              </blockquote>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-b border-[#ded7c8] bg-[#fffaf1]">
+          <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-start lg:py-24">
+            <div className="rounded-3xl bg-[#111827] p-8 text-white">
+              <p className="text-sm font-semibold text-[#9fd6c9]">About Perqora</p>
+              <h2 className="mt-4 text-3xl font-semibold leading-tight">
+                Founder-led infrastructure engineering with senior execution from day one.
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-[#c7d2cc]">
+                Perqora is led by a cloud infrastructure and DevOps practitioner with hands-on
+                experience across Kubernetes, Terraform, SRE, CI/CD, observability, migration, and
+                cloud cost optimization. Replace this paragraph with the final founder name and
+                background when ready.
+              </p>
+              <div className="mt-6 grid gap-3 text-sm text-[#dbe5df]">
+                <p>Placeholder founder: update name later</p>
+                <p>Focus: AI-native DevOps, platform engineering, Kubernetes, SRE, cloud cost</p>
+                <p>Approach: audit first, roadmap second, implementation with measurable handover</p>
+              </div>
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-[#1f7568]">Engagement Model</p>
+              <h2 className="mt-4 text-3xl font-semibold leading-tight text-[#111827] sm:text-5xl">
+                Clear ways to start, from one review to ongoing platform support.
+              </h2>
+              <div className="mt-8 grid gap-4">
+                {engagementModels.map((model) => (
+                  <article key={model.title} className="rounded-2xl border border-[#ded7c8] bg-white p-5">
+                    <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                      <h3 className="text-lg font-semibold text-[#111827]">{model.title}</h3>
+                      <span className="text-sm font-semibold text-[#1f7568]">{model.duration}</span>
+                    </div>
+                    <p className="mt-3 text-sm leading-7 text-[#53605c]">{model.description}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section id="operating-system" className="bg-[#111827] text-white">
           <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:py-24">
             <div>
-              <p className="text-sm font-semibold text-[#9fd6c9]">Live Operating System</p>
+              <p className="text-sm font-semibold text-[#9fd6c9]">10-Second DevOps Cycle</p>
               <h2 className="mt-4 text-3xl font-semibold leading-tight sm:text-5xl">
-                A moving view of DevOps work before it turns into noise.
+                How infrastructure work moves from idea to reliable operation.
               </h2>
               <p className="mt-5 text-lg leading-8 text-[#c7d2cc]">
-                Perqora treats infrastructure as a living operating layer: releases, clusters,
-                Terraform state, reliability signals, AI workflows, and cost controls moving
-                together.
+                The cycle visualizes how Perqora connects planning, CI/CD, Terraform, Kubernetes,
+                observability, AI workflows, and cost controls into one operating rhythm.
               </p>
             </div>
 
@@ -243,7 +376,7 @@ export default function PerqoraLandingPage() {
             <div>
               <p className="text-sm font-semibold text-[#1f7568]">Services</p>
               <h2 className="mt-4 text-3xl font-semibold leading-tight text-[#111827] sm:text-5xl">
-                Consultancy for the infrastructure problems that stall product teams.
+                Specialist infrastructure services for cloud teams that need production discipline.
               </h2>
             </div>
             <p className="text-lg leading-8 text-[#53605c]">
@@ -286,6 +419,62 @@ export default function PerqoraLandingPage() {
                     <p className="mt-1 text-sm leading-6 text-[#53605c]">{copy}</p>
                   </div>
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="border-b border-[#ded7c8] bg-[#f4f0e7]">
+          <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:py-24">
+            <div>
+              <p className="text-sm font-semibold text-[#1f7568]">Lower-Friction CTA</p>
+              <h2 className="mt-4 text-3xl font-semibold leading-tight text-[#111827] sm:text-5xl">
+                Not ready for a call? Request an infrastructure readiness scorecard.
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-[#53605c]">
+                A lighter first step for teams that want to understand risk before booking an
+                audit. Share your stack and Perqora can respond with the right review path.
+              </p>
+            </div>
+            <div className="rounded-3xl border border-[#ded7c8] bg-white p-6 shadow-[0_24px_70px_rgba(20,30,35,0.08)]">
+              <h3 className="text-xl font-semibold text-[#111827]">Scorecard covers</h3>
+              <div className="mt-5 grid gap-3">
+                {[
+                  'Kubernetes readiness',
+                  'Terraform and IaC maturity',
+                  'CI/CD release safety',
+                  'Observability and incident readiness',
+                  'Cloud cost and migration risk',
+                ].map((item) => (
+                  <p key={item} className="rounded-2xl bg-[#f8f5ee] px-4 py-3 text-sm text-[#53605c]">
+                    {item}
+                  </p>
+                ))}
+              </div>
+              <a
+                href="mailto:admin@perqora.in?subject=Infrastructure%20Readiness%20Scorecard"
+                className="mt-6 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-[#111827] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#243145]"
+              >
+                Request Scorecard
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#fffaf1]">
+          <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:py-24">
+            <div>
+              <p className="text-sm font-semibold text-[#1f7568]">FAQ</p>
+              <h2 className="mt-4 text-3xl font-semibold leading-tight text-[#111827] sm:text-5xl">
+                Answers for CTOs and engineering leaders.
+              </h2>
+            </div>
+            <div className="grid gap-4">
+              {faqs.map(([question, answer]) => (
+                <section key={question} className="rounded-2xl border border-[#ded7c8] bg-white p-5">
+                  <h3 className="text-lg font-semibold text-[#111827]">{question}</h3>
+                  <p className="mt-3 text-sm leading-7 text-[#53605c]">{answer}</p>
+                </section>
               ))}
             </div>
           </div>

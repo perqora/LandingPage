@@ -7,8 +7,8 @@
 }
 
 html {
-  background: #0b1110;
-  color: #eef4f1;
+  background: #f4f0e7;
+  color: #18201d;
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   scroll-behavior: smooth;
@@ -17,38 +17,35 @@ html {
 body {
   margin: 0;
   min-width: 320px;
-  background: #0b1110;
+  background: #f4f0e7;
   font-family: inherit;
   text-rendering: optimizeLegibility;
 }
 
 .ops-scene {
-  perspective: 1200px;
+  overflow: hidden;
 }
 
 .ops-grid {
   position: relative;
   min-height: 430px;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 24px;
   background:
-    linear-gradient(rgba(122, 183, 168, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(122, 183, 168, 0.06) 1px, transparent 1px),
-    radial-gradient(circle at 50% 45%, rgba(122, 183, 168, 0.12), transparent 34%),
-    #0b1110;
-  background-size: 34px 34px, 34px 34px, auto, auto;
-  transform: rotateX(58deg) rotateZ(-28deg);
-  transform-style: preserve-3d;
+    radial-gradient(circle at 50% 50%, rgba(159, 214, 201, 0.16), transparent 34%),
+    linear-gradient(rgba(159, 214, 201, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(159, 214, 201, 0.06) 1px, transparent 1px),
+    #0b1118;
+  background-size: auto, 36px 36px, 36px 36px, auto;
 }
 
 .ops-core,
 .ops-node {
   position: absolute;
   z-index: 2;
-  border: 1px solid #2b3935;
-  background: rgba(17, 25, 23, 0.92);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
-  transform: rotateZ(28deg) rotateX(-58deg) translateZ(42px);
+  border: 1px solid rgba(159, 214, 201, 0.2);
+  background: rgba(17, 24, 39, 0.94);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.26);
 }
 
 .ops-core {
@@ -56,32 +53,34 @@ body {
   top: 50%;
   display: grid;
   width: 190px;
-  min-height: 145px;
+  min-height: 150px;
   place-items: center;
   gap: 10px;
   padding: 18px;
   text-align: center;
-  color: #eef4f1;
-  font-weight: 600;
+  color: #f8f5ee;
+  font-weight: 650;
   translate: -50% -50%;
-  animation: ops-float 5.5s ease-in-out infinite;
+  border-radius: 22px;
+  animation: ops-core-glow 10s ease-in-out infinite;
 }
 
 .ops-node {
-  width: 190px;
+  width: 184px;
   padding: 14px;
-  animation: ops-pulse 4.6s ease-in-out infinite;
+  border-radius: 18px;
+  animation: ops-node-cycle 10s ease-in-out infinite;
   animation-delay: var(--delay);
 }
 
 .ops-node-1 {
   left: 8%;
-  top: 12%;
+  top: 10%;
 }
 
 .ops-node-2 {
-  right: 10%;
-  top: 12%;
+  right: 9%;
+  top: 10%;
 }
 
 .ops-node-3 {
@@ -90,13 +89,13 @@ body {
 }
 
 .ops-node-4 {
-  left: 9%;
-  bottom: 11%;
+  left: 8%;
+  bottom: 12%;
 }
 
 .ops-node-5 {
-  left: calc(50% - 95px);
-  bottom: 2%;
+  left: calc(50% - 92px);
+  bottom: 4%;
 }
 
 .ops-line {
@@ -104,59 +103,59 @@ body {
   z-index: 1;
   height: 2px;
   border-radius: 999px;
-  background: linear-gradient(90deg, transparent, #7ab7a8, transparent);
-  opacity: 0.68;
-  animation: ops-flow 2.8s linear infinite;
+  background: linear-gradient(90deg, transparent, #9fd6c9, transparent);
+  opacity: 0.7;
+  animation: ops-flow 10s linear infinite;
 }
 
 .ops-line-1 {
   left: 20%;
-  top: 34%;
-  width: 62%;
-  rotate: 8deg;
+  top: 31%;
+  width: 60%;
+  rotate: 7deg;
 }
 
 .ops-line-2 {
   left: 22%;
-  bottom: 30%;
-  width: 58%;
-  rotate: -13deg;
+  bottom: 28%;
+  width: 56%;
+  rotate: -9deg;
 }
 
 .ops-line-3 {
   left: 50%;
-  top: 16%;
+  top: 18%;
   width: 2px;
-  height: 68%;
-  background: linear-gradient(180deg, transparent, #b8a27a, transparent);
+  height: 62%;
+  background: linear-gradient(180deg, transparent, #c9b79c, transparent);
 }
 
 .ops-line-4 {
-  left: 17%;
+  left: 18%;
   top: 52%;
-  width: 68%;
-  rotate: 31deg;
+  width: 64%;
+  rotate: 28deg;
 }
 
-@keyframes ops-pulse {
+@keyframes ops-node-cycle {
   0%,
   100% {
-    border-color: #2b3935;
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+    border-color: rgba(159, 214, 201, 0.18);
+    transform: translateY(0);
   }
   50% {
-    border-color: #7ab7a8;
-    box-shadow: 0 18px 44px rgba(122, 183, 168, 0.16);
+    border-color: rgba(159, 214, 201, 0.72);
+    transform: translateY(-6px);
   }
 }
 
-@keyframes ops-float {
+@keyframes ops-core-glow {
   0%,
   100% {
-    filter: drop-shadow(0 0 0 rgba(122, 183, 168, 0));
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.26);
   }
   50% {
-    filter: drop-shadow(0 0 22px rgba(122, 183, 168, 0.18));
+    box-shadow: 0 24px 72px rgba(159, 214, 201, 0.18);
   }
 }
 
@@ -165,19 +164,13 @@ body {
     background-position: 0 0;
   }
   to {
-    background-position: 220px 0;
+    background-position: 360px 0;
   }
 }
 
 @media (max-width: 768px) {
   .ops-grid {
     min-height: 620px;
-    transform: none;
-  }
-
-  .ops-core,
-  .ops-node {
-    transform: none;
   }
 
   .ops-core {
@@ -187,12 +180,12 @@ body {
   .ops-node {
     left: 50%;
     right: auto;
-    width: min(260px, calc(100% - 32px));
+    width: min(270px, calc(100% - 32px));
     translate: -50% 0;
   }
 
   .ops-node-1 {
-    top: 200px;
+    top: 198px;
   }
 
   .ops-node-2 {
@@ -200,17 +193,17 @@ body {
   }
 
   .ops-node-3 {
-    top: 364px;
+    top: 366px;
     bottom: auto;
   }
 
   .ops-node-4 {
-    top: 446px;
+    top: 450px;
     bottom: auto;
   }
 
   .ops-node-5 {
-    top: 528px;
+    top: 534px;
     bottom: auto;
     left: 50%;
   }

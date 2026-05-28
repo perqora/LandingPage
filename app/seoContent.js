@@ -27,14 +27,14 @@ export const pages = {
   },
   kubernetesConsulting: {
     path: '/kubernetes-consulting',
-    title: 'Kubernetes Consulting',
-    heading: 'Kubernetes Consulting For Production Systems',
+    title: 'Kubernetes Consulting For Startups',
+    heading: 'Kubernetes Consulting For Startups That Need Production Discipline',
     description:
-      'Perqora helps startups design, stabilize, scale, and operate Kubernetes platforms with practical SRE, observability, and cloud infrastructure expertise.',
+      'Perqora helps startups design, stabilize, migrate, scale, and operate Kubernetes platforms with practical SRE, observability, and cloud infrastructure expertise.',
     sections: [
-      'Review cluster architecture, ingress, autoscaling, networking, storage, security boundaries, and release workflows.',
-      'Improve production reliability with capacity planning, workload isolation, rollout safety, SLOs, and incident-ready observability.',
-      'Support migrations from fragile clusters or VM-based workloads to maintainable Kubernetes platforms that can grow with the business.',
+      'Review cluster architecture, ingress, autoscaling, networking, storage, security boundaries, release workflows, and workload readiness.',
+      'Improve production reliability with capacity planning, workload isolation, rollout safety, SLOs, incident-ready observability, and runbooks.',
+      'Support startup migrations from fragile clusters or VM-based workloads to maintainable Kubernetes platforms that can grow with the business.',
     ],
   },
   cloudCostOptimization: {
@@ -59,6 +59,42 @@ export const pages = {
       'Use AI-assisted workflows to generate, review, and standardize Terraform, Kubernetes, CI/CD, and runbook automation.',
       'Apply AI to observability engineering, alert enrichment, incident triage, root-cause analysis, and operational knowledge capture.',
       'Build responsible AI DevOps systems that keep humans in control while removing repetitive infrastructure toil.',
+    ],
+  },
+  terraformAutomation: {
+    path: '/terraform-automation',
+    title: 'Terraform Automation',
+    heading: 'Terraform Automation For Cloud Teams That Need Safer Infrastructure Delivery',
+    description:
+      'Perqora helps cloud teams standardize Terraform modules, state workflows, review practices, policy guardrails, and infrastructure automation for AWS, Azure, GCP, and Kubernetes platforms.',
+    sections: [
+      'Refactor fragile Terraform into reusable modules, cleaner state boundaries, environment patterns, and safer pull-request workflows.',
+      'Build infrastructure delivery guardrails across networking, IAM, Kubernetes, observability, cost controls, and platform foundations.',
+      'Reduce manual DevOps toil with Terraform automation that supports faster releases without losing governance or reliability.',
+    ],
+  },
+  sreConsulting: {
+    path: '/sre-consulting',
+    title: 'SRE Consulting',
+    heading: 'SRE Consulting For Startups Building Reliable Cloud Systems',
+    description:
+      'Perqora provides SRE consulting for startups that need practical reliability engineering, SLOs, incident readiness, observability, runbooks, and production operating practices.',
+    sections: [
+      'Define reliability targets, SLOs, alerting strategy, incident response practices, and operational ownership for fast-moving engineering teams.',
+      'Improve observability with metrics, logs, traces, dashboards, service health views, alert quality, and production readiness reviews.',
+      'Turn recurring incidents into platform improvements across Kubernetes, CI/CD, Terraform, cloud architecture, and team workflows.',
+    ],
+  },
+  cloudMigration: {
+    path: '/cloud-migration',
+    title: 'Cloud Migration',
+    heading: 'Cloud Migration Services For Teams Moving Without Production Chaos',
+    description:
+      'Perqora supports cloud migration, Kubernetes migration, landing zones, Terraform refactors, workload cutovers, rollback planning, and post-migration reliability hardening.',
+    sections: [
+      'Plan migrations around business risk, dependency mapping, landing zones, security boundaries, network design, and rollback paths.',
+      'Move workloads with Terraform-backed infrastructure, Kubernetes readiness checks, CI/CD updates, observability validation, and cost controls.',
+      'Stabilize after migration with SRE practices, runbooks, dashboards, scaling checks, and production handover for internal teams.',
     ],
   },
   contact: {
