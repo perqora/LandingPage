@@ -1,3 +1,5 @@
+"use client";
+
 const calendlyUrl = 'https://calendly.com/admin-perqora/30-minute-meeting-clone';
 
 const pageLinks = [
@@ -61,6 +63,21 @@ const clientSignals = [
   ['Series B SaaS', 'improved deployment reliability with CI/CD guardrails, rollback paths, and observability review'],
   ['Fintech startup', 'migrated workloads toward Kubernetes with Terraform structure and cloud governance controls'],
   ['AI product company', 'reduced cloud cost exposure through rightsizing, workload scheduling, and cost visibility'],
+];
+
+const founders = [
+  {
+    name: 'Rohit Sureka',
+    role: 'Co-founder, Perqora',
+    linkedin: 'https://www.linkedin.com/in/rohit-sureka-26095798/',
+    focus: 'Cloud infrastructure, DevOps automation, platform engineering, Kubernetes, and reliability systems.',
+  },
+  {
+    name: 'Chandan Kumar',
+    role: 'Co-founder, Perqora',
+    linkedin: 'https://www.linkedin.com/in/chandan-kumar-ba665620/',
+    focus: 'AI-native infrastructure, cloud engineering, automation, delivery systems, and operational execution.',
+  },
 ];
 
 const engagementModels = [
@@ -177,6 +194,29 @@ const inputClass =
   'w-full rounded-xl border border-[#d8d2c4] bg-white px-4 py-3 text-sm text-[#18201d] outline-none transition placeholder:text-[#8b948f] focus:border-[#1f7568]';
 
 export default function PerqoraLandingPage() {
+  function handleInquirySubmit(event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const fields = [
+      ['Name', formData.get('name')],
+      ['Work email', formData.get('email')],
+      ['Company', formData.get('company')],
+      ['Service needed', formData.get('service')],
+      ['Timeline', formData.get('timeline')],
+      ['Cloud / stack', formData.get('stack')],
+      ['Message', formData.get('message')],
+    ];
+
+    const body = fields
+      .map(([label, value]) => `${label}: ${value || 'Not provided'}`)
+      .join('\n');
+
+    window.location.href = `mailto:admin@perqora.in?subject=${encodeURIComponent(
+      'Perqora Website Inquiry'
+    )}&body=${encodeURIComponent(body)}`;
+  }
+
   const faqJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -390,15 +430,31 @@ export default function PerqoraLandingPage() {
                 Founder-led infrastructure engineering with senior execution from day one.
               </h2>
               <p className="mt-5 text-lg leading-8 text-[#c7d2cc]">
-                Perqora is led by a cloud infrastructure and DevOps practitioner with hands-on
-                experience across Kubernetes, Terraform, SRE, CI/CD, observability, migration,
-                security posture, AI-native automation, and cloud cost optimization. Replace this
-                paragraph with the final founder name and background when ready.
+                Perqora is led by Rohit Sureka and Chandan Kumar, bringing hands-on focus across
+                Kubernetes, Terraform, SRE, CI/CD, observability, migration, security posture,
+                AI-native automation, and cloud cost optimization.
               </p>
-              <div className="mt-6 grid gap-3 text-sm text-[#dbe5df]">
-                <p>Placeholder founder: update name later</p>
-                <p>Focus: AI-native DevOps, platform engineering, Kubernetes, SRE, FinOps</p>
-                <p>Approach: audit first, roadmap second, implementation with measurable handover</p>
+              <div className="mt-6 grid gap-4">
+                {founders.map((founder) => (
+                  <article key={founder.name} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <div>
+                        <h3 className="text-lg font-semibold text-white">{founder.name}</h3>
+                        <p className="mt-1 text-sm text-[#9fd6c9]">{founder.role}</p>
+                      </div>
+                      <a
+                        href={founder.linkedin}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`${founder.name} on LinkedIn`}
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-[#9fd6c9]"
+                      >
+                        <LinkedinIcon />
+                      </a>
+                    </div>
+                    <p className="mt-3 text-sm leading-6 text-[#dbe5df]">{founder.focus}</p>
+                  </article>
+                ))}
               </div>
             </div>
             <div>
@@ -539,9 +595,7 @@ export default function PerqoraLandingPage() {
             </div>
 
             <form
-              action="mailto:admin@perqora.in"
-              method="post"
-              encType="text/plain"
+              onSubmit={handleInquirySubmit}
               className="rounded-3xl border border-[#ded7c8] bg-white p-6 shadow-[0_24px_70px_rgba(20,30,35,0.08)]"
             >
               <div className="grid gap-4 sm:grid-cols-2">
