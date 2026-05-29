@@ -10,6 +10,8 @@ const pageLinks = [
   ['AI DevOps', '/ai-devops'],
   ['SRE', '/sre-consulting'],
   ['Migration', '/cloud-migration'],
+  ['Blog', '/blog'],
+  ['FAQ', '/faq'],
   ['Contact', '#contact'],
 ];
 
