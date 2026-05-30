@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 
 const calendlyUrl = 'https://calendly.com/admin-perqora/30-minute-meeting-clone';
 
@@ -207,20 +208,26 @@ const inputClass =
   'w-full rounded-xl border border-[#d8d2c4] bg-white px-4 py-3 text-sm text-[#18201d] outline-none transition placeholder:text-[#8b948f] focus:border-[#1f7568]';
 
 export default function PerqoraLandingPage() {
-  function handleInquirySubmit(event) {
+  const [formState, setFormState] = React.useState('idle'); // idle | sending | success | error
+
+  async function handleInquirySubmit(event) {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const fields = [
-      ['Name', formData.get('name')],
-      ['Work email', formData.get('email')],
-      ['Company', formData.get('company')],
-      ['Service needed', formData.get('service')],
-      ['Timeline', formData.get('timeline')],
-      ['Cloud / stack', formData.get('stack')],
-      ['Message', formData.get('message')],
-    ];
-    const body = fields.map(([label, value]) => `${label}: ${value || 'Not provided'}`).join('\n');
-    window.location.href = `mailto:admin@perqora.in?subject=${encodeURIComponent('Perqora Website Inquiry')}&body=${encodeURIComponent(body)}`;
+    setFormState('sending');
+    try {
+      const res = await fetch('https://formspree.io/f/mvzyyeal', {
+        method: 'POST',
+        body: new FormData(event.currentTarget),
+        headers: { Accept: 'application/json' },
+      });
+      if (res.ok) {
+        setFormState('success');
+        event.currentTarget.reset();
+      } else {
+        setFormState('error');
+      }
+    } catch {
+      setFormState('error');
+    }
   }
 
   const faqJsonLd = {
@@ -642,12 +649,32 @@ export default function PerqoraLandingPage() {
                   />
                 </Field>
               </div>
-              <button
-                type="submit"
-                className="mt-5 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-[#111827] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#243145]"
-              >
-                Send Inquiry
-              </button>
+              {formState === 'success' ? (
+                <div className="mt-5 rounded-2xl bg-[#e8f5f1] border border-[#c9e8e0] px-5 py-4 text-center">
+                  <p className="text-sm font-semibold text-[#1f7568]">✓ Inquiry sent successfully</p>
+                  <p className="mt-1 text-xs text-[#53605c]">Perqora will respond within 1 business day.</p>
+                </div>
+              ) : formState === 'error' ? (
+                <div className="mt-5 space-y-3">
+                  <div className="rounded-2xl bg-[#fef2f2] border border-[#fecaca] px-5 py-4 text-center">
+                    <p className="text-sm font-semibold text-red-700">Something went wrong — please try again.</p>
+                  </div>
+                  <button
+                    type="submit"
+                    className="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-[#111827] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#243145]"
+                  >
+                    Retry
+                  </button>
+                </div>
+              ) : (
+                <button
+                  type="submit"
+                  disabled={formState === 'sending'}
+                  className="mt-5 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-[#111827] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#243145] disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {formState === 'sending' ? 'Sending…' : 'Send Inquiry'}
+                </button>
+              )}
             </form>
           </div>
         </section>
