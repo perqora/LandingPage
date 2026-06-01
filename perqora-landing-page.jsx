@@ -219,8 +219,12 @@ export default function PerqoraLandingPage() {
         body: new FormData(event.currentTarget),
         headers: { Accept: 'application/json' },
       });
-      const data = await res.json();
-      if (res.status === 200 || data.ok) {
+      console.log('Formspree status:', res.status);
+      const text = await res.text();
+      console.log('Formspree body:', text);
+      let ok = res.status === 200;
+      try { const d = JSON.parse(text); ok = ok || !!d.ok; } catch {}
+      if (ok) {
         setFormState('success');
         event.currentTarget.reset();
       } else {
