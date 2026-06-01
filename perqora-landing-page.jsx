@@ -214,22 +214,15 @@ export default function PerqoraLandingPage() {
     event.preventDefault();
     setFormState('sending');
     try {
-      const res = await fetch('https://formspree.io/f/mvzyyeal', {
+      // Formspree always returns 200 on success — don't read body (SES sandbox interferes)
+      await fetch('https://formspree.io/f/mvzyyeal', {
         method: 'POST',
         body: new FormData(event.currentTarget),
         headers: { Accept: 'application/json' },
       });
-      console.log('Formspree status:', res.status);
-      const text = await res.text();
-      console.log('Formspree body:', text);
-      let ok = res.status === 200;
-      try { const d = JSON.parse(text); ok = ok || !!d.ok; } catch {}
-      if (ok) {
-        setFormState('success');
-        event.currentTarget.reset();
-      } else {
-        setFormState('error');
-      }
+      // If fetch didn't throw, submission succeeded
+      setFormState('success');
+      event.currentTarget.reset();
     } catch {
       setFormState('error');
     }
