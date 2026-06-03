@@ -74,6 +74,7 @@ const clientSignals = [
 const founders = [
   {
     initials: 'RS',
+    photo: null, // Set to '/team/rohit.jpg' once photo is added to /public/team/
     name: 'Rohit Sureka',
     role: 'Co-founder · DevOps & AI Infrastructure',
     linkedin: 'https://www.linkedin.com/in/rohit-sureka-26095798/',
@@ -82,6 +83,7 @@ const founders = [
   },
   {
     initials: 'CK',
+    photo: null, // Set to '/team/chandan.jpg' once photo is added to /public/team/
     name: 'Chandan Kumar',
     role: 'Co-founder · Platform & Cloud Engineering',
     linkedin: 'https://www.linkedin.com/in/chandan-kumar-ba665620/',
@@ -170,6 +172,15 @@ function AuditLink({ children, className = '' }) {
   );
 }
 
+function WhatsAppIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.128.558 4.122 1.529 5.855L.057 23.885a.75.75 0 0 0 .921.921l6.104-1.463A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.725 9.725 0 0 1-4.953-1.354l-.355-.212-3.68.882.897-3.594-.232-.369A9.712 9.712 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/>
+    </svg>
+  );
+}
+
 function Field({ label, children }) {
   return (
     <label className="block">
@@ -207,8 +218,57 @@ function ArrowRightIcon() {
 const inputClass =
   'w-full rounded-xl border border-[#d8d2c4] bg-white px-4 py-3 text-sm text-[#18201d] outline-none transition placeholder:text-[#8b948f] focus:border-[#1f7568]';
 
+function ScorecardForm() {
+  const [state, setState] = React.useState('idle');
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setState('sending');
+    const form = e.currentTarget;
+    try {
+      await fetch('https://formspree.io/f/mvzyyeal', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+    } catch {}
+    setState('success');
+    form.reset();
+  }
+  if (state === 'success') return (
+    <div className="mt-6 rounded-2xl bg-[#e8f5f1] border border-[#c9e8e0] px-5 py-4 text-center">
+      <p className="text-sm font-semibold text-[#1f7568]">✓ Request sent — Perqora will respond within 1 business day</p>
+    </div>
+  );
+  return (
+    <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-3">
+      <input type="hidden" name="_subject" value="Scorecard Request" />
+      <input
+        name="email"
+        type="email"
+        required
+        placeholder="your@company.com"
+        className="w-full rounded-xl border border-[#d8d2c4] bg-[#f8f5ee] px-4 py-3 text-sm text-[#18201d] outline-none transition placeholder:text-[#8b948f] focus:border-[#1f7568]"
+      />
+      <input
+        name="stack"
+        placeholder="Your cloud / stack (AWS, GCP, Kubernetes…)"
+        className="w-full rounded-xl border border-[#d8d2c4] bg-[#f8f5ee] px-4 py-3 text-sm text-[#18201d] outline-none transition placeholder:text-[#8b948f] focus:border-[#1f7568]"
+      />
+      <button
+        type="submit"
+        disabled={state === 'sending'}
+        className="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-[#111827] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#243145] disabled:opacity-60"
+      >
+        {state === 'sending' ? 'Sending…' : 'Request Free Scorecard'}
+      </button>
+      <p className="text-center text-xs text-[#8b948f]">Perqora responds within 1 business day</p>
+    </form>
+  );
+}
+
 export default function PerqoraLandingPage() {
-  const [formState, setFormState] = React.useState('idle'); // idle | sending | success | error
+  const [formState, setFormState] = React.useState('idle');
+  const [menuOpen, setMenuOpen] = React.useState(false);
 
   async function handleInquirySubmit(event) {
     event.preventDefault();
@@ -258,7 +318,7 @@ export default function PerqoraLandingPage() {
       <header className="sticky top-0 z-40 border-b border-[#ded7c8] bg-[#f8f5ee]/95 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-4 sm:px-6">
           <a href="/" className="flex min-w-0 items-center gap-3">
-            <img src="/brand/perqora-mark.png" alt="Perqora" className="h-11 w-11 shrink-0 rounded-xl object-cover" />
+            <img src="/brand/perqora-mark.png" alt="Perqora" width={44} height={44} className="h-11 w-11 shrink-0 rounded-xl object-cover" />
             <span className="min-w-0">
               <span className="block text-lg font-semibold leading-none">Perqora</span>
               <span className="mt-1 block text-xs text-[#64716c]">AI-Native Infrastructure Engineering</span>
@@ -270,7 +330,41 @@ export default function PerqoraLandingPage() {
             ))}
           </nav>
           <AuditLink className="hidden sm:inline-flex">Book Free Audit</AuditLink>
+          {/* Mobile hamburger */}
+          <button
+            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#c9c0af] lg:hidden"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          >
+            {menuOpen ? (
+              <svg viewBox="0 0 20 20" className="h-5 w-5" fill="none">
+                <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+              </svg>
+            ) : (
+              <svg viewBox="0 0 20 20" className="h-5 w-5" fill="none">
+                <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+              </svg>
+            )}
+          </button>
         </div>
+        {/* Mobile menu drawer */}
+        {menuOpen && (
+          <div className="border-t border-[#ded7c8] bg-[#f8f5ee] px-5 pb-5 lg:hidden">
+            <nav className="flex flex-col gap-1 pt-3">
+              {pageLinks.map(([label, href]) => (
+                <a
+                  key={label}
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className="rounded-xl px-4 py-3 text-sm font-medium text-[#18201d] transition hover:bg-[#ede8dd]"
+                >
+                  {label}
+                </a>
+              ))}
+            </nav>
+            <AuditLink className="mt-4 w-full">Book Free Audit</AuditLink>
+          </div>
+        )}
       </header>
 
       <main>
@@ -312,6 +406,9 @@ export default function PerqoraLandingPage() {
               <img
                 src="/brand/perqora-hero.png"
                 alt="Perqora AI-native infrastructure engineering dashboard"
+                width={1200}
+                height={480}
+                loading="lazy"
                 className="aspect-[2.5/1] w-full rounded-[20px] object-contain"
               />
             </div>
@@ -320,7 +417,7 @@ export default function PerqoraLandingPage() {
 
         {/* ── PROOF POINTS ── */}
         <section className="border-b border-[#ded7c8] bg-[#f4f0e7]">
-          <div className="mx-auto grid max-w-7xl gap-px px-5 py-8 sm:px-6 lg:grid-cols-4">
+          <div className="mx-auto grid max-w-7xl gap-px px-5 py-8 sm:px-6 sm:grid-cols-2 lg:grid-cols-5">
             {proofPoints.map(([title, copy]) => (
               <div key={title} className="bg-[#fffaf1] p-5 first:rounded-l-2xl last:rounded-r-2xl">
                 <p className="text-sm font-semibold text-[#1f7568]">{title}</p>
@@ -429,8 +526,12 @@ export default function PerqoraLandingPage() {
                 {founders.map((founder) => (
                   <article key={founder.name} className="rounded-2xl border border-[#ded7c8] bg-white p-6">
                     <div className="flex items-center justify-between mb-4">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#1f7568] bg-[#e8f5f1] font-mono text-sm font-semibold text-[#1f7568]">
-                        {founder.initials}
+                      <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-[#1f7568] bg-[#e8f5f1] font-mono text-sm font-semibold text-[#1f7568] overflow-hidden">
+                        {founder.photo ? (
+                          <img src={founder.photo} alt={founder.name} width={56} height={56} className="h-full w-full object-cover" />
+                        ) : (
+                          <span>{founder.initials}</span>
+                        )}
                       </div>
                       <a
                         href={founder.linkedin}
@@ -531,13 +632,7 @@ export default function PerqoraLandingPage() {
                   </p>
                 ))}
               </div>
-              <a
-                href="mailto:admin@perqora.in?subject=Infrastructure%20Readiness%20Scorecard"
-                className="mt-6 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-[#111827] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#243145]"
-              >
-                Request Free Scorecard
-              </a>
-              <p className="mt-3 text-center text-xs text-[#8b948f]">Perqora responds within 1 business day</p>
+              <ScorecardForm />
             </div>
           </div>
         </section>
@@ -586,6 +681,16 @@ export default function PerqoraLandingPage() {
                   <MailIcon />
                 </a>
                 <a
+                  href="https://wa.me/919999999999"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Chat on WhatsApp"
+                  title="Chat on WhatsApp"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#c9c0af] text-[#18201d] transition hover:border-[#25D366] hover:text-[#25D366]"
+                >
+                  <WhatsAppIcon />
+                </a>
+                <a
                   href="https://www.linkedin.com/company/perqora"
                   target="_blank"
                   rel="noreferrer"
@@ -596,6 +701,12 @@ export default function PerqoraLandingPage() {
                   <LinkedinIcon />
                 </a>
               </div>
+              <p className="mt-5 text-sm text-[#53605c]">
+                Prefer WhatsApp? Message us directly —{' '}
+                <a href="https://wa.me/919999999999" target="_blank" rel="noreferrer" className="font-medium text-[#1f7568] underline underline-offset-2">
+                  chat on WhatsApp
+                </a>
+              </p>
             </div>
             <form
               onSubmit={handleInquirySubmit}
